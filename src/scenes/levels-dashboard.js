@@ -7,26 +7,36 @@ export class LevelsDashboard extends Phaser.Scene {
     init() { }
     preload() {
         this.load.image('button', '../../assets/images/square.png');
+        this.load.image('return', '../../assets/images/return.png');
     }
     create() {
         this.add.image(0, 0, 'menu-bg').setOrigin(0);
-        
+
+        this.returnButton = this.add.image(50, 50, 'return');
+        this.returnButton.setScale(0.1);
+
         /** text(x, y, text, style) */
         this.add.text(
-            this.game.renderer.width / 2, 100, "Pick a level", {font: "3em"}
+            this.game.renderer.width / 2, 100, "Pick a level", { font: "3em" }
         ).setOrigin(0.5);
 
-        let buttons = [];
+        this.buttons = [];
 
-        for (let i=0; i < 5; i++) {
-            buttons[i] = this.add.image(
-                this.game.renderer.width / 2, 200 + (100 * (i+1)), 'button'
-            );    
-            buttons[i].setScale(0.25);
-            buttons[i].setInteractive();
-            buttons[i].on("pointerdown", () => {
+        for (let i = 0; i < 5; i++) {
+            this.buttons[i] = this.add.image(
+                this.game.renderer.width / 2, 200 + (100 * (i + 1)), 'button'
+            );
+            this.buttons[i].setScale(0.25);
+            this.buttons[i].setInteractive();
+            this.buttons[i].on("pointerdown", () => {
                 console.log("nivel " + (i + 1));
+                this.scene.start("level-" + (i + 1));
             });
         }
+
+        this.returnButton.setInteractive();
+        this.returnButton.on("pointerdown", () => {
+            this.scene.start("menu");
+        });
     }
 }

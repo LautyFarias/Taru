@@ -13,9 +13,13 @@ export class Options extends Phaser.Scene {
     preload() {
         this.load.svg('sound-avaible', '../../assets/svg/sound-avaible.svg');
         this.load.svg('sound-inavaible', '../../assets/svg/sound-inavaible.svg');
+        this.load.image('return', '../../assets/images/return.png');
     }
     create() {
         this.add.image(0, 0, 'menu-bg').setOrigin(0);
+
+        this.returnButton = this.add.image(50, 50, 'return');
+        this.returnButton.setScale(0.1);
 
         let soundInavaible = this.add.image(widthTQ, 250, 'sound-inavaible');
         soundInavaible.setScale(0.4);
@@ -29,5 +33,10 @@ export class Options extends Phaser.Scene {
         this.add.text(
             halfWidth, gameHeight - gameHeight / 3, "From www.flaticon.local"
         ).setOrigin(0.5);
+
+        this.returnButton.setInteractive();
+        this.returnButton.on("pointerdown", () => {
+            this.scene.start("menu");
+        });
     }
 }
