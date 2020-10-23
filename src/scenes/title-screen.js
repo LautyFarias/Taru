@@ -14,14 +14,14 @@ export class TitleScreen extends Phaser.Scene {
     init() { }
     preload() {
         /** assets base url */
-        // this.load.setBaseURL('../assets');
+        this.load.setBaseURL('../../assets');
 
         /** image(name, path) */
-        this.load.image('play-button', '../../assets/images/play.png');
-        this.load.image('options-button', '../../assets/images/button.png');
-        this.load.image('lvls-dashboard-button', '../../assets/images/button.png');
-        this.load.image('menu-bg', 'http://labs.phaser.io/assets/skies/space3.png');
-        this.load.image('logo', 'http://labs.phaser.io/assets/sprites/phaser3-logo.png');
+        this.load.image('play-button', 'images/play.png');
+        this.load.image('options-button', 'images/button.png');
+        this.load.image('lvls-dashboard-button', 'images/button.png');
+        this.load.image('menu-bg', 'images/space.png');
+        this.load.image('logo', 'images/title.png');
         // this.load.image('red', 'http://labs.phaser.io/assets/particles/red.png');
 
         // this.load.audio(

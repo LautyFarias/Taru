@@ -11,13 +11,15 @@ export class LevelOne extends Level {
         this.ideaMessage = "Dale boludon!";
     }
     preload() {
-        this.load.image('wall', 'https://labs.phaser.io/assets/sprites/platform.png');
+        this.load.setBaseURL('../../../assets');
+
+        this.load.image('wall', 'images/platform.png');
         this.load.spritesheet('dude',
-            'https://labs.phaser.io/assets/sprites/dude.png',
+            'images/dude.png',
             { frameWidth: 32, frameHeight: 48 }
         );
-        this.load.image('return', '../../assets/images/return.png');
-        this.load.image('lamp', '../../assets/images/lamp.png');
+        this.load.image('return', 'images/return.png');
+        this.load.image('lamp', 'images/lamp.png');
     }
     create() {
         this.add.image(0, 0, 'menu-bg').setOrigin(0);

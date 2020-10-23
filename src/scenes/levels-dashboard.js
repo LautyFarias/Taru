@@ -6,8 +6,10 @@ export class LevelsDashboard extends Phaser.Scene {
     }
     init() { }
     preload() {
-        this.load.image('button', '../../assets/images/square.png');
-        this.load.image('return', '../../assets/images/return.png');
+        this.load.setBaseURL('../../assets');
+        
+        this.load.image('button', 'images/square.png');
+        this.load.image('return', 'images/return.png');
     }
     create() {
         this.add.image(0, 0, 'menu-bg').setOrigin(0);

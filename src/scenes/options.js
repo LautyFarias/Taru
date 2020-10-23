@@ -11,9 +11,11 @@ export class Options extends Phaser.Scene {
         self.gameHeight = this.game.renderer.height;
     }
     preload() {
-        this.load.svg('sound-avaible', '../../assets/svg/sound-avaible.svg');
-        this.load.svg('sound-inavaible', '../../assets/svg/sound-inavaible.svg');
-        this.load.image('return', '../../assets/images/return.png');
+        this.load.setBaseURL('../../assets');
+
+        this.load.svg('sound-avaible', 'svg/sound-avaible.svg');
+        this.load.svg('sound-inavaible', 'svg/sound-inavaible.svg');
+        this.load.image('return', 'images/return.png');
     }
     create() {
         this.add.image(0, 0, 'menu-bg').setOrigin(0);

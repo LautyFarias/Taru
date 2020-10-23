@@ -10,7 +10,9 @@ export class IdeaModal extends Phaser.Scene {
     init() {
     }
     preload() {
-        this.load.image('modal', '../../../assets/images/button.png');
+        this.load.setBaseURL('../../../assets');
+
+        this.load.image('modal', 'images/button.png');
     }
     create() {
         this.modal = this.add.image(

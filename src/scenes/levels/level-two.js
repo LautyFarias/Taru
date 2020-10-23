@@ -6,9 +6,11 @@ export class LevelTwo extends Phaser.Scene {
     }
     init() { }
     preload() {
-        this.load.image('wall', 'https://labs.phaser.io/assets/sprites/platform.png');
+        this.load.setBaseURL('../../../assets');
+
+        this.load.image('wall', 'images/platform.png');
         this.load.spritesheet('dude',
-            'https://labs.phaser.io/assets/sprites/dude.png',
+            'images/dude.png',
             { frameWidth: 32, frameHeight: 48 }
         );
     }
