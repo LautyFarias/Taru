@@ -3,6 +3,7 @@ import { LevelsDashboard } from "./scenes/levels-dashboard.js";
 import { Options } from "./scenes/options.js";
 import { LevelOne } from "./scenes/levels/level-one.js";
 import { LevelTwo } from "./scenes/levels/level-two.js";
+import { LevelThree } from "./scenes/levels/level-three.js";
 
 var config = {
     /** Game configs */
@@ -23,7 +24,7 @@ var config = {
     },
     scene: [
         TitleScreen, LevelsDashboard, Options,
-        LevelOne, LevelTwo
+        LevelOne, LevelTwo, LevelThree
     ],
     pixelArt: true
 };
