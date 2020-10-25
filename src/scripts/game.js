@@ -1,9 +1,13 @@
+import 'phaser';
+import '@babel/polyfill';
+
 import { TitleScreen } from "./scenes/title-screen.js";
 import { LevelsDashboard } from "./scenes/levels-dashboard.js";
 import { Options } from "./scenes/options.js";
 import { LevelOne } from "./scenes/levels/level-one.js";
 import { LevelTwo } from "./scenes/levels/level-two.js";
 import { LevelThree } from "./scenes/levels/level-three.js";
+import { LevelFor } from "./scenes/levels/level-for.js";
 
 var config = {
     /** Game configs */
@@ -24,9 +28,10 @@ var config = {
     },
     scene: [
         TitleScreen, LevelsDashboard, Options,
-        LevelOne, LevelTwo, LevelThree
-    ],
-    pixelArt: true
+        LevelOne, LevelTwo, LevelThree, LevelFor
+    ]
 };
 
-var game = new Phaser.Game(config);
+window.addEventListener('load', () => {
+    const game = new Phaser.Game(config);
+});

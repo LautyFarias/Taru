@@ -1,0 +1,68 @@
+import Push from "push.js";
+import { Level } from "../interfaces/level.js";
+import { IdeaModal } from "../modals/idea-modal.js";
+
+export class LevelFor extends Level {
+    constructor() {
+        super({
+            key: "level-4"
+        });
+    }
+    init() { }
+    preload() {
+        this.load.setBaseURL('../../../assets')
+            .spritesheet(
+                'dude', 'images/dude.png',
+                { frameWidth: 32, frameHeight: 48 }
+            )
+            .image('return', 'images/return.png')
+            .image('lamp', 'images/lamp.png');
+    }
+    create() {
+        this.add.image(0, 0, 'menu-bg')
+            .setOrigin(0);
+
+        this.returnButton = this.add.image(50, 50, 'return')
+            .setScale(0.1)
+            .setDepth(2)
+            .setInteractive()
+            .on("pointerdown", () => {
+                this.scene.start("menu");
+            });
+
+        this.ideaButton = this.add.image(550, 50, 'lamp')
+            .setScale(0.1)
+            .setDepth(2)
+            .setInteractive()
+            .on("pointerdown", () => {
+                this.createWindow(IdeaModal);
+            });
+
+        this.sendNotification = () => {
+            Push.create("Insert uwu text, bibi pls", {
+                icon: this.load.baseURL + '/images/lamp.png',
+                requireIteraction: true,
+                silent: true,
+                onClick: this.notificationCallback
+            });
+        };
+
+        this.notificationCallback = () => {
+            this.dude = this.add.image(
+                this.game.renderer.width / 2,
+                this.game.renderer.height / 2,
+                'dude'
+            )
+                .setOrigin(0.5)
+                .setDepth(0)
+                .setInteractive()
+                .on('pointerdown', () => {
+                    alert("lo encontraste!");
+                    this.scene.start("menu");
+                });
+            Push.clear();
+        };
+
+        setTimeout(this.sendNotification, 3000);
+    }
+}

@@ -1,4 +1,6 @@
-export class LevelThree extends Phaser.Scene {
+import { Level } from "../interfaces/level.js";
+
+export class LevelThree extends Level {
     constructor() {
         super({
             key: "level-3"

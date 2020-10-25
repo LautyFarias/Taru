@@ -13,7 +13,6 @@ export class LevelOne extends Level {
     preload() {
         this.load.setBaseURL('../../../assets');
 
-        this.load.image('wall', 'images/platform.png');
         this.load.spritesheet('dude',
             'images/dude.png',
             { frameWidth: 32, frameHeight: 48 }
