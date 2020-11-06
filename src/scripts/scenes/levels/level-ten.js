@@ -1,10 +1,10 @@
 import Level from "../interfaces/level.js";
 import IdeaModal from "../interfaces/idea-modal.js";
 
-export class LevelFive extends Level {
+export class LevelTen extends Level {
     constructor() {
         super({
-            key: "level-5"
+            key: "level-10"
         });
     }
     init() {
@@ -20,8 +20,8 @@ export class LevelFive extends Level {
             depth: 2,
         };
         this.dudeDta = {
-            x: this.game.renderer.width / 2,
-            y: this.game.renderer.height / 2
+            x: 600,
+            y: 0
         };
         this.wallsDta = {
             initialX: 10,
@@ -33,22 +33,16 @@ export class LevelFive extends Level {
         this.ideaMessage = "Dale boludon!";
     }
     preload() {
-        this.load.plugin(
-            'rexpinchplugin',
-            'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexpinchplugin.min.js',
-            true
-        );
-        this.load.setBaseURL('assets')
+        this.load.setBaseURL('../../../assets')
             .spritesheet('dude',
                 'images/dude.png',
                 { frameWidth: 32, frameHeight: 48 }
             )
             .image('return', 'images/return.png')
             .image('lamp', 'images/lamp.png');
-
     }
     create() {
-        this.bg = this.add.image(0, 0, 'menu-bg')
+        this.add.image(0, 0, 'menu-bg')
             .setOrigin(0);
 
         this.returnButton = this.add.image(this.rtnBtnDta.x, this.rtnBtnDta.y, 'return')
@@ -73,26 +67,26 @@ export class LevelFive extends Level {
             this.dudeDta.x,
             this.dudeDta.y,
             'dude'
-        ).setScale(0.1);
+        ).setInteractive()
+            .on('pointerdown', () => {
+                alert("lo encontraste!");
+                this.scene.start("title-screen");
+            });
 
-        var dragScale = this.plugins.get('rexpinchplugin').add(this);
+        this.walls = [];
 
-        var camera = this.cameras.main;
-        let defaultCameraZoom = camera.zoom;
-        dragScale.on('pinch', function (dragScale) {
-            var scaleFactor = dragScale.scaleFactor;
-            if (
-                camera.zoom * scaleFactor >= defaultCameraZoom &&
-                camera.zoom * scaleFactor <= 30
-            ) {
-                camera.zoom *= scaleFactor;
-            }
-            if (camera.zoom * scaleFactor <= 30) {
-                this.dude.setInteractive().on('pointerdown', () => {
-                    this.createWindow(IdeaModal);
-                    this.scene.start("title-screen");
-                });
-            }
-        }, this);
+        for (let i = 0; i < this.wallsDta.cant; i++) {
+            this.walls[i] = this.add.image(
+                this.wallsDta.initialX * (i + 1),
+                this.wallsDta.initialY * (i + 1),
+                'button'
+            ).setInteractive({ draggable: true });
+            this.input.setDraggable(this.walls[i]);
+        }
+
+        this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+            gameObject.x = dragX;
+            gameObject.y = dragY;
+        });
     }
 }

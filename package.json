@@ -4,10 +4,10 @@
   "description": "Phaser 3 game.",
   "homepage": "https://github.com/LautyFarias/videogame#readme",
   "scripts": {
-    "start": "webpack-dev-server --config webpack/webpack.dev.js",
+    "dev": "webpack-dev-server --config webpack/webpack.dev.js",
     "build": "webpack --config webpack/webpack.prod.js",
-    "bundle": "npm run build",
-    "serve": "serve dist"
+    "start": "serve dist",
+    "serve": "npm run build && serve dist"
   },
   "keywords": [
     "Phaser",

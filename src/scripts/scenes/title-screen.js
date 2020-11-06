@@ -1,7 +1,7 @@
-export class TitleScreen extends Phaser.Scene {
+export default class TitleScreen extends Phaser.Scene {
     constructor() {
         super({
-            key: "menu"
+            key: "title-screen"
         });
     }
     /**
@@ -11,94 +11,116 @@ export class TitleScreen extends Phaser.Scene {
      * 3 - create: first drawn
      * 4 - update: update every 16 ms
      */
-    init() { }
+    init() {
+        this.bgDta = {
+            // send to preload scene
+            x: 0,
+            y: 0,
+            origin: 0
+        };
+        this.logoDta = {
+            x: this.game.renderer.width / 2,
+            y: 100
+        };
+        this.playBtnDta = {
+            x: this.game.renderer.width / 2,
+            y: 250,
+            scale: 0.3
+        };
+        this.lvlsDashbrdBtnDta = {
+            x: this.game.renderer.width / 2,
+            y: this.playBtnDta.y + 150,
+            scale: 0.2
+        };
+        this.optsBtnDta = {
+            x: this.game.renderer.width / 2,
+            y: this.lvlsDashbrdBtnDta.y + 150,
+            scale: 0.2
+        };
+    }
     preload() {
-        /** assets base url */
-        this.load.setBaseURL('../../assets');
-
-        /** image(name, path) */
-        this.load.image('play-button', 'images/play.png');
-        this.load.image('options-button', 'images/button.png');
-        this.load.image('lvls-dashboard-button', 'images/button.png');
-        this.load.image('menu-bg', 'images/space.png');
-        this.load.image('logo', 'images/title.png');
-        // this.load.image('red', 'http://labs.phaser.io/assets/particles/red.png');
-
-        // this.load.audio(
+        /**
+         * assets base url
+         * 
+         * image(name, path)
+         */
+        this.load.setBaseURL('assets')
+            .image('play-btn', 'images/play.png')
+            .image('options-btn', 'images/button.png')
+            .image('lvls-dashbrd-btn', 'images/button.png')
+            .image('menu-bg', 'images/space.png')
+            .image('logo', 'images/title.png');
+        // .audio(
         //     'menu-music',
-        //     'assets/audio/Andrea_Milana_-_Harlequin_-_The_Clockworks_-_Electribe_MX_REMIX.m4a'
+        //     'assets/audio/title-screen-music.ext'
         // );
     }
     create() {
         /**
-         * image(y, x, name)
+         * image(x, y, name)
          * setOrigin(where start the image render)
          */
-        this.add.image(0, 0, 'menu-bg').setOrigin(0);
+        this.add.image(
+            this.bgDta.x,
+            this.bgDta.y,
+            'menu-bg'
+        ).setOrigin(this.bgDta.origin);
 
-        // let music = this.sound.add('menu-music');	
+        // this.music = this.sound.add('menu-music');	
         // if (this.sound.context.state === 'suspended') {
-
         //     this.sound.context.resume();
         // }
         // this.sound.pauseOnBlur = false;
-        // music.play({
+        // this.music.play({
         //     loop: true
         // });
 
-        let title = this.add.image(this.game.renderer.width / 2, 100, 'logo');
-        let playButton = this.add.image(this.game.renderer.width / 2, 250, 'play-button');
+        this.add.image(this.logoDta.x, this.logoDta.y, 'logo');
+
         /**
-         * setScale (scale) = css scale
+         * 
+         * setScale (scale) = css sDtacale
+         * 
+         * setInteractive: enable click,
+         * scale: 0.30
          */
-        playButton.setScale(0.30);
+        this.playBtn = this.add.image(
+            this.playBtnDta.x,
+            this.playBtnDta.y,
+            'play-btn'
+        ).setScale(this.playBtnDta.scale)
+            .setInteractive()
+            .on("pointerover", () => { })// hover
+            .on("pointerout", () => { })// out hover
+            .on("pointerdown", () => { // onclick
+                /** start a scene */
+                console.log("works")
+                // this.scene.start("");
+            });
 
-        /** setInteractive: enable click */        
-        playButton.setInteractive();
+        this.lvlsDashbrdBtn = this.add.image(
+            this.lvlsDashbrdBtnDta.x,
+            this.lvlsDashbrdBtnDta.y,
+            'lvls-dashbrd-btn'
+        ).setScale(this.lvlsDashbrdBtnDta.scale)
+            .setDepth(3)
+            .setInteractive()
+            .on("pointerover", () => { })// hover
+            .on("pointerout", () => { })// out hover
+            .on("pointerdown", () => { // onclick
+                this.scene.start("levels-dashboard");
+            });
 
-        playButton.on("pointerover", () => { // hover
-        });
-
-        playButton.on("pointerout", () => { // out hover
-        });
-
-        playButton.on("pointerdown", () => { // onclick
-            /** start a scene */
-            // this.scene.start("");
-        });
-
-        let lvlsDashboardButton = this.add.image(
-            this.game.renderer.width / 2, playButton.y + 150, 'lvls-dashboard-button'
-        );
-        lvlsDashboardButton.setScale(0.2);
-
-        lvlsDashboardButton.setInteractive();
-
-        lvlsDashboardButton.on("pointerover", () => { // hover
-        });
-
-        lvlsDashboardButton.on("pointerout", () => { // out hover
-        });
-
-        lvlsDashboardButton.on("pointerdown", () => { // onclick
-            this.scene.start("levels-dashboard");
-        });
-
-        let OptionsButton = this.add.image(
-            this.game.renderer.width / 2, lvlsDashboardButton.y + 150, 'options-button'
-        );
-        OptionsButton.setScale(0.2);
-
-        OptionsButton.setInteractive();
-
-        OptionsButton.on("pointerover", () => { // hover
-        });
-
-        OptionsButton.on("pointerout", () => { // out hover
-        });
-
-        OptionsButton.on("pointerdown", () => { // onclick
-            this.scene.start("options");
-        });
+        this.optionsBtn = this.add.image(
+            this.optsBtnDta.x,
+            this.optsBtnDta.y,
+            'options-btn'
+        ).setScale(this.optsBtnDta.scale)
+            .setInteractive()
+            .on("pointerover", () => { })// hover
+            .on("pointerout", () => { })// out hover
+            .on("pointerdown", () => { // onclick
+                this.scene.start("options");
+            });
     }
 }

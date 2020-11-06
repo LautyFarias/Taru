@@ -1,44 +1,71 @@
-export class Options extends Phaser.Scene {
+export default class Options extends Phaser.Scene {
     constructor() {
         super({
             key: "options"
         });
     }
     init() {
-        self.gameWidth = this.game.renderer.width;
-        self.halfWidth = gameWidth / 2;
-        self.widthTQ = gameWidth / 3;
-        self.gameHeight = this.game.renderer.height;
+        this.rtnBtnDta = {
+            x: 50,
+            y: 50,
+            scale: 0.1
+        };
+        this.sndEnaBtnDta = {
+            x: this.game.renderer.width / 3,
+            y: 250,
+            scale: 0.1
+        };
+        this.sndDisBtnDta = {
+            x: this.game.renderer.width - (this.game.renderer.width / 3),
+            y: 250,
+            scale: 0.4
+        };
+        this.crsTxtDta = {
+            x: this.game.renderer.width / 2,
+            oneY: this.game.renderer.height - (this.game.renderer.height / 3),
+            twoY: this.game.renderer.height - (this.game.renderer.height / 3) - 100,
+            oneTxt: "Icons made by Freepik",
+            twoTxt: "From www.flaticon.local",
+            origin: 0.5
+        };
     }
     preload() {
-        this.load.setBaseURL('../../assets');
-
-        this.load.svg('sound-avaible', 'svg/sound-avaible.svg');
-        this.load.svg('sound-inavaible', 'svg/sound-inavaible.svg');
-        this.load.image('return', 'images/return.png');
+        this.load.setBaseURL('../../assets')
+            .svg('sound-enable', 'svg/sound-avaible.svg')
+            .svg('sound-disable', 'svg/sound-inavaible.svg')
+            .image('return', 'images/return.png');
     }
     create() {
-        this.add.image(0, 0, 'menu-bg').setOrigin(0);
+        this.add.image(0, 0, 'menu-bg')
+            .setOrigin(0);
 
-        this.returnButton = this.add.image(50, 50, 'return');
-        this.returnButton.setScale(0.1);
+        this.returnButton = this.add.image(this.rtnBtnDta.x, this.rtnBtnDta.y, 'return')
+            .setScale(this.rtnBtnDta.scale)
+            .setInteractive()
+            .on("pointerdown", () => {
+                this.scene.start("title-screen");
+            });
 
-        let soundInavaible = this.add.image(widthTQ, 250, 'sound-inavaible');
-        soundInavaible.setScale(0.4);
-        let soundAvaible = this.add.image(gameWidth - widthTQ, 250, 'sound-avaible');
-        soundAvaible.setScale(0.1);
+        this.soundDisableBtn = this.add.image(
+            this.sndDisBtnDta.x,
+            this.sndDisBtnDta.y,
+            'sound-disable'
+        ).setScale(this.sndDisBtnDta.scale);
+        this.soundEnableBtn = this.add.image(
+            this.sndEnaBtnDta.x,
+            this.sndEnaBtnDta.y,
+            'sound-enable'
+        ).setScale(this.sndEnaBtnDta.scale);
 
         this.add.text(
-            halfWidth, gameHeight - gameHeight / 3 - 100,
-            "Icons made by Freepik"
-        ).setOrigin(0.5);
+            this.crsTxtDta.x,
+            this.crsTxtDta.oneY,
+            this.crsTxtDta.oneTxt
+        ).setOrigin(this.crsTxtDta.scale);
         this.add.text(
-            halfWidth, gameHeight - gameHeight / 3, "From www.flaticon.local"
-        ).setOrigin(0.5);
-
-        this.returnButton.setInteractive();
-        this.returnButton.on("pointerdown", () => {
-            this.scene.start("menu");
-        });
+            this.crsTxtDta.x,
+            this.crsTxtDta.twoY,
+            this.crsTxtDta.twoTxt
+        ).setOrigin(this.crsTxtDta.scale);
     }
 }

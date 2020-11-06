@@ -1,4 +1,4 @@
-import { Level } from "../interfaces/level.js";
+import Level from "../interfaces/level.js";
 
 export class LevelThree extends Level {
     constructor() {
@@ -6,7 +6,31 @@ export class LevelThree extends Level {
             key: "level-3"
         });
     }
-    init() { }
+    init() {
+        this.rtnBtnDta = {
+            x: 50,
+            y: 50,
+            scale: 0.1,
+            depth: 2
+        };
+        this.ideaBtnDta = {
+            x: 550,
+            y: 50,
+            scale: 0.1,
+            depth: 2
+        };
+        this.dudeDta = {
+            x: 550,
+            y: 400,
+            depth: 0
+        };
+        this.spotlightDta = {
+            x: 400,
+            y: 300,
+            key: 'linter',
+            add: false
+        };
+    }
     preload() {
         this.load.setBaseURL('../../../assets')
             .image('return', 'images/return.png')
@@ -23,29 +47,27 @@ export class LevelThree extends Level {
             .setDepth(1);
         this.bg.tint = new Phaser.Display.Color(0, 0, 0);
 
-        this.returnButton = this.add.image(50, 50, 'return')
-            .setScale(0.1)
-            .setDepth(2)
+        this.returnButton = this.add.image(this.rtnBtnDta.x, this.rtnBtnDta.y, 'return')
+            .setScale(this.rtnBtnDta.scale)
+            .setDepth(this.ideaBtnDta.depth)
             .setInteractive()
             .on("pointerdown", () => {
-                this.scene.start("menu");
+                this.scene.start("title-screen");
             });
 
-        this.ideaButton = this.add.image(550, 50, 'lamp')
-            .setScale(0.1)
-            .setDepth(2)
+        this.ideaButton = this.add.image(
+            this.ideaBtnDta.x,
+            this.ideaBtnDta.y,
+            'lamp'
+        ).setScale(this.ideaBtnDta.scale)
+            .setDepth(this.ideaBtnDta.depth)
             .setInteractive();
 
-        this.dude = this.add.image(550, 400, 'dude')
-            .setDepth(0)
+        this.dude = this.add.image(this.dudeDta.x, this.dudeDta.y, 'dude')
+            .setDepth(this.dudeDta.depth)
             .setInteractive();
 
-        let spotlight = this.make.sprite({
-            x: 400,
-            y: 300,
-            key: 'linter',
-            add: false
-        });
+        let spotlight = this.make.sprite(this.spotlightDta);
 
         this.input.on('pointermove', function (pointer) {
             spotlight.x = pointer.x;
@@ -67,7 +89,7 @@ export class LevelThree extends Level {
             this.dude.mask = new Phaser.Display.Masks.BitmapMask(this, spotlight);
             this.dude.on('pointerdown', () => {
                 alert("lo encontraste!");
-                this.scene.start("menu");
+                this.scene.start("title-screen");
             });
         });
     }
