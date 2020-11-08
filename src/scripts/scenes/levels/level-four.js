@@ -1,14 +1,13 @@
 import Push from "push.js";
 import Level from "../interfaces/level.js";
-import IdeaModal from "../interfaces/idea-modal.js";
 
-export class LevelFour extends Level {
+export default class LevelFour extends Level {
     constructor() {
         super({
             key: "level-4"
         });
     }
-    init() {
+    init(props) {
         this.rtnBtnDta = {
             x: 50,
             y: 50,
@@ -26,6 +25,8 @@ export class LevelFour extends Level {
             origin: 0.5,
             depth: 0
         };
+        this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
+        if (props.callback) props.callback(this);
     }
     preload() {
         this.load.setBaseURL('../../../assets')
@@ -37,8 +38,7 @@ export class LevelFour extends Level {
             .image('lamp', 'images/lamp.png');
     }
     create() {
-        this.add.image(0, 0, 'menu-bg')
-            .setOrigin(0);
+        this.bg = this.add.image(0, 0, 'menu-bg').setOrigin(0);
 
         this.returnButton = this.add.image(this.rtnBtnDta.x, this.rtnBtnDta.y, 'return')
             .setScale(this.rtnBtnDta.scale)
@@ -55,7 +55,7 @@ export class LevelFour extends Level {
             .setDepth(this.ideaBtnDta.depth)
             .setInteractive()
             .on("pointerdown", () => {
-                this.createWindow(IdeaModal);
+                this.showIdeaModal();
             });
 
         this.sendNotification = () => {
@@ -76,8 +76,7 @@ export class LevelFour extends Level {
                 .setDepth(this.dudeDta.depth)
                 .setInteractive()
                 .on('pointerdown', () => {
-                    alert("lo encontraste!");
-                    this.scene.start("title-screen");
+                    this.addModal(this, this.goNextLevel);
                 });
             Push.clear();
         };

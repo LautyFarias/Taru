@@ -1,83 +1,93 @@
-import Level from "../interfaces/level.js";
-import IdeaModal from "../interfaces/idea-modal.js";
-import Shake from 'shake.js';
+import Level from "../interfaces/level";
 
-export class LevelTwo extends Level {
+export default class LevelTwo extends Level {
     constructor() {
-        super({
-            key: 'level-2'
-        });
+        super({ key: 'level-2' });
     }
-    init() {
-        this.rtnBtnDta = {
-            x: 50,
-            y: 50,
-            scale: 0.1
+    init(props) {
+        this.config = {
+            dude: {
+                x: this.game.renderer.width / 2,
+                y: this.game.renderer.height / 2
+            }
         };
-        this.ideaBtnDta = {
-            x: 550,
-            y: 50,
-            scale: 0.1,
-            depth: 2,
-        };
-        this.dudeDta = {
-            x: this.game.renderer.width,
-            y: this.game.renderer.height,
-        };
+        this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
+        this.cache.json.add('currentLevel', this.currentLevel);
+        if (props.callback) props.callback(this);
     }
-    preload() {
-        this.load.setBaseURL('../../../assets')
-            .spritesheet(
-                'dude', 'images/dude.png',
-                { frameWidth: 32, frameHeight: 48 }
-            )
-            .image('return', 'images/return.png')
-            .image('lamp', 'images/lamp.png');
-    }
+    preload() { }
     create() {
-        this.add.image(0, 0, 'menu-bg')
-            .setOrigin(0);
+        this.addLevelBg(this);
+        this.addIdeaButton(this);
+        this.addReturnButton(this);
 
-        this.returnButton = this.add.image(this.rtnBtnDta.x, this.rtnBtnDta.y, 'return')
-            .setScale(this.rtnBtnDta.scale)
-            .setInteractive()
-            .on("pointerdown", () => {
-                this.scene.start("title-screen");
-            });
+        this.dude = this.physics.add.sprite(
+            this.config.dude.x,
+            this.config.dude.y,
+            'dude', 4
+        ).setInteractive().on("pointerup", () => {
+            this.moveDude();
+        }, this);
 
-        this.ideaButton = this.add.image(
-            this.ideaBtnDta.x,
-            this.ideaBtnDta.y,
-            'lamp'
-        ).setScale(this.ideaBtnDta.scale)
-            .setDepth(this.ideaBtnDta.depth)
-            .setInteractive()
-            .on("pointerdown", () => {
-                this.createWindow(IdeaModal);
-            });
+        this.dude.body.setAllowGravity(false);
 
-        this.shake = new Shake({
-            threshold: 25, // optional shake strength threshold
-            timeout: 1000 // optional, determines the frequency of event generation
+        this.input.setDraggable(this.dude).dragTimeThreshold = 2000;
+
+        this.anims.create({
+            key: 'left',
+            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'turn',
+            frames: [{ key: 'dude', frame: 4 }],
+            frameRate: 20
+        });
+        this.anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+            frameRate: 10,
+            repeat: -1
         });
 
-        this.shake.start();
-
-        this.appearDude = () => {
-            alert('shake!');
-            this.dude = this.add.image(
-                this.dudeDta.x,
-                this.dudeDta.y,
-                'dude'
-            ).setInteractive()
-                .on('pointerdown', () => {
-                    alert("lo encontraste!");
-                    this.scene.start("title-screen");
-                });
-            window.removeEventListener('shake', this.appearDude, false);
-            this.shake.stop();
+        this.dude.moveTo = this.plugins.get('rexmovetoplugin').add(this.dude, {
+            speed: 400,
+        }).on('complete', function () {
+            this.dude.anims.play('turn', true);
+        }, this);
+    }
+    update() {
+        this.dude.on("dragstart", () => {
+            this.dude.catched = true;
+        }, this);
+        if (this.dude.catched) {
+            delete this.dude.catched;
+            this.addModal(this, this.goNextLevel);
+        }
+    }
+    moveDude() {
+        let randomPosition = this.getRandomPosition();
+        if (randomPosition.x > this.dude.x) {
+            this.dude.anims.play('right', true);
+        }
+        if (randomPosition.x < this.dude.x) {
+            this.dude.anims.play('left', true);
+        }
+        this.dude.moveTo.moveTo(randomPosition.x, randomPosition.y);
+    }
+    getRandomPosition() {
+        let randomX = Phaser.Math.Between(
+            this.game.renderer.width - (this.game.renderer.width - 100),
+            this.game.renderer.width - 100
+        );
+        let randomY = Phaser.Math.Between(
+            this.game.renderer.height - (this.game.renderer.height - 200),
+            this.game.renderer.height - 200
+        );
+        return {
+            x: randomX,
+            y: randomY
         };
-
-        window.addEventListener('shake', this.appearDude, false);
     }
 }

@@ -7,7 +7,7 @@
     "dev": "webpack-dev-server --config webpack/webpack.dev.js",
     "build": "webpack --config webpack/webpack.prod.js",
     "start": "serve dist",
-    "serve": "npm run build && serve dist"
+    "serve": "npm run build && npm start"
   },
   "keywords": [
     "Phaser",
@@ -54,6 +54,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.10.4",
     "phaser": "^3.24.1",
+    "phaser3-rex-plugins": "^1.1.31",
     "push.js": "^1.0.12",
     "shake.js": "^1.2.2"
   }

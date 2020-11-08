@@ -1,12 +1,12 @@
 import Level from "../interfaces/level.js";
 
-export class LevelThree extends Level {
+export default class LevelThree extends Level {
     constructor() {
         super({
             key: "level-3"
         });
     }
-    init() {
+    init(props) {
         this.rtnBtnDta = {
             x: 50,
             y: 50,
@@ -30,6 +30,8 @@ export class LevelThree extends Level {
             key: 'linter',
             add: false
         };
+        this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
+        if (props.callback) props.callback(this);
     }
     preload() {
         this.load.setBaseURL('../../../assets')
@@ -42,7 +44,7 @@ export class LevelThree extends Level {
             .image('linter', 'images/linter.png');
     }
     create() {
-        this.bg = this.add.image(0, 0, 'menu-bg')
+        this.bg = this.add.image(0, 0, 'level-bg')
             .setOrigin(0)
             .setDepth(1);
         this.bg.tint = new Phaser.Display.Color(0, 0, 0);
@@ -88,8 +90,7 @@ export class LevelThree extends Level {
                 .mask = new Phaser.Display.Masks.BitmapMask(this, spotlight);
             this.dude.mask = new Phaser.Display.Masks.BitmapMask(this, spotlight);
             this.dude.on('pointerdown', () => {
-                alert("lo encontraste!");
-                this.scene.start("title-screen");
+                this.addModal(this, this.goNextLevel);
             });
         });
     }

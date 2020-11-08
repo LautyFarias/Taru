@@ -1,13 +1,12 @@
 import Level from "../interfaces/level.js";
-import IdeaModal from "../interfaces/idea-modal.js";
 
-export class LevelFive extends Level {
+export default class LevelFive extends Level {
     constructor() {
         super({
-            key: "level-5"
+            key: "level-4"
         });
     }
-    init() {
+    init(props) {
         this.rtnBtnDta = {
             x: 50,
             y: 50,
@@ -31,6 +30,8 @@ export class LevelFive extends Level {
             cant: 100
         };
         this.ideaMessage = "Dale boludon!";
+        this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
+        if (props.callback) props.callback(this);
     }
     preload() {
         this.load.plugin(
@@ -48,8 +49,7 @@ export class LevelFive extends Level {
 
     }
     create() {
-        this.bg = this.add.image(0, 0, 'menu-bg')
-            .setOrigin(0);
+        this.bg = this.add.image(0, 0, 'menu-bg').setOrigin(0);
 
         this.returnButton = this.add.image(this.rtnBtnDta.x, this.rtnBtnDta.y, 'return')
             .setScale(this.rtnBtnDta.scale)
@@ -66,7 +66,7 @@ export class LevelFive extends Level {
             .setDepth(this.ideaBtnDta.depth)
             .setInteractive()
             .on("pointerdown", () => {
-                this.createWindow(IdeaModal);
+                this.showIdeaModal();
             });
 
         this.dude = this.add.image(
@@ -89,8 +89,7 @@ export class LevelFive extends Level {
             }
             if (camera.zoom * scaleFactor <= 30) {
                 this.dude.setInteractive().on('pointerdown', () => {
-                    this.createWindow(IdeaModal);
-                    this.scene.start("title-screen");
+                    this.addModal(this, this.goNextLevel);
                 });
             }
         }, this);

@@ -1,8 +1,7 @@
-export default class TitleScreen extends Phaser.Scene {
+import MenuScreen from './interfaces/menu-screen.js';
+export default class TitleScreen extends MenuScreen {
     constructor() {
-        super({
-            key: "title-screen"
-        });
+        super({ key: "title-screen" });
     }
     /**
      * functions order:
@@ -12,59 +11,41 @@ export default class TitleScreen extends Phaser.Scene {
      * 4 - update: update every 16 ms
      */
     init() {
-        this.bgDta = {
-            // send to preload scene
-            x: 0,
-            y: 0,
-            origin: 0
-        };
-        this.logoDta = {
-            x: this.game.renderer.width / 2,
-            y: 100
-        };
-        this.playBtnDta = {
-            x: this.game.renderer.width / 2,
-            y: 250,
-            scale: 0.3
-        };
-        this.lvlsDashbrdBtnDta = {
-            x: this.game.renderer.width / 2,
-            y: this.playBtnDta.y + 150,
-            scale: 0.2
-        };
-        this.optsBtnDta = {
-            x: this.game.renderer.width / 2,
-            y: this.lvlsDashbrdBtnDta.y + 150,
-            scale: 0.2
+        this.config = {
+            logo: {
+                x: this.game.renderer.width / 2,
+                y: 100
+            },
+            playButton: {
+                width: this.game.config.custom.defaultButton.width,
+                height: this.game.config.custom.defaultButton.height,
+                x: this.game.renderer.width / 2,
+                y: 400,
+                color: this.game.config.custom.defaultButton.color,
+            },
+            lvlsDashbrdBtn: {
+                width: this.game.config.custom.defaultButton.width,
+                height: this.game.config.custom.defaultButton.height,
+                x: this.game.renderer.width / 2,
+                y: 550,
+                color: this.game.config.custom.defaultButton.color,
+            },
+            optionsButton: {
+                width: this.game.config.custom.defaultButton.width,
+                height: this.game.config.custom.defaultButton.height,
+                x: this.game.renderer.width - this.game.renderer.width / 4,
+                y: 550,
+                color: this.game.config.custom.defaultButton.color,
+            }
         };
     }
-    preload() {
-        /**
-         * assets base url
-         * 
-         * image(name, path)
-         */
-        this.load.setBaseURL('assets')
-            .image('play-btn', 'images/play.png')
-            .image('options-btn', 'images/button.png')
-            .image('lvls-dashbrd-btn', 'images/button.png')
-            .image('menu-bg', 'images/space.png')
-            .image('logo', 'images/title.png');
-        // .audio(
-        //     'menu-music',
-        //     'assets/audio/title-screen-music.ext'
-        // );
-    }
+    preload() { }
     create() {
         /**
          * image(x, y, name)
          * setOrigin(where start the image render)
          */
-        this.add.image(
-            this.bgDta.x,
-            this.bgDta.y,
-            'menu-bg'
-        ).setOrigin(this.bgDta.origin);
+        this.addBg(this);
 
         // this.music = this.sound.add('menu-music');	
         // if (this.sound.context.state === 'suspended') {
@@ -75,52 +56,34 @@ export default class TitleScreen extends Phaser.Scene {
         //     loop: true
         // });
 
-        this.add.image(this.logoDta.x, this.logoDta.y, 'logo');
+        this.add.image(this.config.logo.x, this.config.logo.y, 'logo');
 
         /**
          * 
-         * setScale (scale) = css sDtacale
+         * setScale (scale) = css scale
          * 
          * setInteractive: enable click,
          * scale: 0.30
          */
-        this.playBtn = this.add.image(
-            this.playBtnDta.x,
-            this.playBtnDta.y,
-            'play-btn'
-        ).setScale(this.playBtnDta.scale)
-            .setInteractive()
-            .on("pointerover", () => { })// hover
-            .on("pointerout", () => { })// out hover
-            .on("pointerdown", () => { // onclick
-                /** start a scene */
-                console.log("works")
-                // this.scene.start("");
+        this.addButton(this, () => {
+            this.scene.start(
+                `level-${this.cache.json.exists('currentLevel') ? this.cache.json.get('currentLevel') : 1}`, {
+                currentLevel: this.cache.json.exists('currentLevel') ? this.cache.json.get('currentLevel') : 1,
+                callback: scene => scene.cameras.main.fadeIn(1000, 0, 0, 0)
             });
+        }, "Play", this.config.playButton);
 
-        this.lvlsDashbrdBtn = this.add.image(
-            this.lvlsDashbrdBtnDta.x,
-            this.lvlsDashbrdBtnDta.y,
-            'lvls-dashbrd-btn'
-        ).setScale(this.lvlsDashbrdBtnDta.scale)
-            .setDepth(3)
-            .setInteractive()
-            .on("pointerover", () => { })// hover
-            .on("pointerout", () => { })// out hover
-            .on("pointerdown", () => { // onclick
-                this.scene.start("levels-dashboard");
+        this.addButton(this, () => {
+            this.scene.start("levels-dashboard", {
+                currentLevel: this.cache.json.exists('currentLevel') ? this.cache.json.get('currentLevel') : 1,
+                callback: scene => scene.cameras.main.fadeIn(1000, 0, 0, 0)
             });
+        }, "Levels", this.config.lvlsDashbrdBtn);
 
-        this.optionsBtn = this.add.image(
-            this.optsBtnDta.x,
-            this.optsBtnDta.y,
-            'options-btn'
-        ).setScale(this.optsBtnDta.scale)
-            .setInteractive()
-            .on("pointerover", () => { })// hover
-            .on("pointerout", () => { })// out hover
-            .on("pointerdown", () => { // onclick
-                this.scene.start("options");
-            });
+        // this.addButton(this, () => {
+        //     this.scene.start("options", {
+        //         callback: scene => scene.cameras.main.fadeIn(1000, 0, 0, 0)
+        //     });
+        // }, "Options", this.config.optionsButton);
     }
 }
