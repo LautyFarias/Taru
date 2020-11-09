@@ -2,5 +2,8 @@
   "compilerOptions": {
     "module": "commonjs",
     "allowJs": true
-  }
+  },
+  "exclude": [
+    "./dist/**/*",
+  ]
 }
