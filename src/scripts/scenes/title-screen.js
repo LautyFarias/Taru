@@ -14,7 +14,7 @@ export default class TitleScreen extends MenuScreen {
         this.config = {
             logo: {
                 x: this.game.renderer.width / 2,
-                y: 100
+                y: 200
             },
             playButton: {
                 width: this.game.config.custom.defaultButton.width,

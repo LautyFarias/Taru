@@ -1,34 +1,30 @@
 export default class IdeaButton extends Phaser.GameObjects.Image {
-    constructor(scene, action, data, modal) {
+    constructor(scene, action, data) {
         super(scene, data.x, data.y, 'idea-button');
         this.action = action ? action : this.showIdeaModal;
-        this.modal = modal;
+        this.countIdeas = -1;
         this.setScale(data.scale).setDepth(data.depth)
             .setInteractive().on("pointerdown", () => {
                 this.removeInteractive();
+                this.setTint(0x555555);
                 this.action();
-            }, scene);
+            }, this);
 
     }
     showIdeaModal() {
-        this.scene.ideaModal = this.scene.add.rectangle(
-            this.modal.x, this.modal.y, this.modal.width,
-            this.modal.height, this.modal.color
-        );
-        this.scene.plugins.get('rexscaleplugin').popup(this.scene.ideaModal, 1000)
-            .once('complete', () => {
-                this.has_modal = true;
-                this.scene.input.on("pointerdown", () => {
-                    this.setInteractive();
-                    if (this.has_modal) {
-                        this.disposeIdeaModal();
-                    }
-                });
-            });
-    }
-    disposeIdeaModal() {
-        this.scene.plugins.get('rexscaleplugin').scaleDownDestroy(
-            this.scene.ideaModal, 500
-        ).once('complete', () => { this.has_modal = false; });
+        if (this.countIdeas < this.scene.ideaMessages.length - 1) {
+            this.countIdeas++;
+        }
+        this.ideaModal = this.scene.addModal(this.scene, () => {
+            this.setInteractive().clearTint();
+        }, {
+            title: {
+                text: "",
+                styles: {}
+            }, body: {
+                text: this.scene.ideaMessages[this.countIdeas],
+                styles: {}
+            }
+        });
     }
 }

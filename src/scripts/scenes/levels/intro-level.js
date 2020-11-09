@@ -1,4 +1,5 @@
 import Level from "../interfaces/level.js";
+
 export default class IntroLevel extends Level {
     constructor() {
         super({ key: "level-1" });
@@ -16,8 +17,14 @@ export default class IntroLevel extends Level {
             'Click the ******* dude!'
         ];
         this.finishedMessage = {
-            title: "Excelent!",
-            message: "It was easy?"
+            title: {
+                text: "Excelent!",
+                style: {}
+            },
+            body: {
+                text: "Was it easy?",
+                style: {}
+            }
         };
         this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         this.cache.json.add('currentLevel', this.currentLevel);
@@ -37,12 +44,10 @@ export default class IntroLevel extends Level {
         this.dude = this.add.sprite(
             this.config.dude.x,
             this.config.dude.y,
-            'dude', 4
-        ).setInteractive().on('pointerdown', () => {
-            this.addModal(this, this.goNextLevel, {
-                title: this.finishedMessage.title,
-                body: this.finishedMessage.message
+            'dude', 4)
+            .setScale(1.5)
+            .setInteractive().on('pointerdown', () => {
+                this.addModal(this, this.goNextLevel, this.finishedMessage);
             });
-        });
     }
 }

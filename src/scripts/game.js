@@ -1,20 +1,21 @@
 import 'phaser';
 import '@babel/polyfill';
 
-import ButtonPlugin from 'phaser3-rex-plugins/plugins/button-plugin.js';
 import ScalePlugin from 'phaser3-rex-plugins/plugins/scale-plugin.js';
+import RoundRectanglePlugin from 'phaser3-rex-plugins/plugins/roundrectangle-plugin.js';
+import PinchPlugin from 'phaser3-rex-plugins/plugins/pinch-plugin';
 
 import Preload from './scenes/preload.js';
 import TitleScreen from "./scenes/title-screen.js";
 import LevelsDashboard from "./scenes/levels-dashboard.js";
 import Options from "./scenes/options.js";
 import LevelOne from "./scenes/levels/intro-level.js";
-import LevelTwo from "./scenes/levels/level-two.js";
+import LevelTwo from "./scenes/levels/hold-pressed-level.js";
 import LevelFive from "./scenes/levels/shake-level.js";
-import LevelThree from "./scenes/levels/level-three.js";
-import LevelNine from "./scenes/levels/level-four.js";
-import LevelFour from "./scenes/levels/level-five.js";
-import LevelTen from "./scenes/levels/level-ten.js";
+import LevelSix from "./scenes/levels/darkness-level.js";
+import LevelNine from "./scenes/levels/push-level.js";
+import LevelFour from "./scenes/levels/pinch-level.js";
+import LevelTen from "./scenes/levels/find-taru.js";
 
 var config = {
     /** Game configs */
@@ -28,15 +29,21 @@ var config = {
         }
     },
     plugins: {
-        global: [{
-            key: 'rexButton',
-            plugin: ButtonPlugin,
-            start: true
-        },{
-            key: 'rexscaleplugin',
-            plugin: ScalePlugin,
-            start: true
-        }]
+        global: [
+            {
+                key: 'rexRoundRectanglePlugin',
+                plugin: RoundRectanglePlugin,
+                start: true
+            }, {
+                key: 'rexscaleplugin',
+                plugin: ScalePlugin,
+                start: true
+            }, {
+                key: 'rexpinchplugin',
+                plugin: PinchPlugin,
+                start: true
+            }
+        ]
     },
     scale: {
         mode: Phaser.Scale.FIT,
@@ -48,11 +55,13 @@ var config = {
         Preload, TitleScreen, LevelsDashboard, Options,
         LevelOne,
         LevelTwo,
-        LevelThree,
+        // LevelThree,
         LevelFour,
         LevelFive,
+        LevelSix,
         // LevelSeven,
-        // LevelNine,
+        // LevelEight,
+        LevelNine,
         LevelTen,
     ],
 };

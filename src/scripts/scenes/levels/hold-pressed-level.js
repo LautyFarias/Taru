@@ -1,6 +1,6 @@
 import Level from "../interfaces/level";
 
-export default class LevelTwo extends Level {
+export default class HoldPressedLevel extends Level {
     constructor() {
         super({ key: 'level-2' });
     }
@@ -9,6 +9,21 @@ export default class LevelTwo extends Level {
             dude: {
                 x: this.game.renderer.width / 2,
                 y: this.game.renderer.height / 2
+            }
+        };
+        this.ideaMessages = [
+            'It is slippery',
+            'Strangle it!',
+            'Hold clicked the dude'
+        ];
+        this.finishedMessage = {
+            title: {
+                text: "Excelent!",
+                style: {}
+            },
+            body: {
+                text: "It was easy?",
+                style: {}
             }
         };
         this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
@@ -24,10 +39,11 @@ export default class LevelTwo extends Level {
         this.dude = this.physics.add.sprite(
             this.config.dude.x,
             this.config.dude.y,
-            'dude', 4
-        ).setInteractive().on("pointerup", () => {
-            this.moveDude();
-        }, this);
+            'dude', 4)
+            .setScale(1.5)
+            .setInteractive().on("pointerup", () => {
+                this.moveDude();
+            }, this);
 
         this.dude.body.setAllowGravity(false);
 
@@ -63,7 +79,7 @@ export default class LevelTwo extends Level {
         }, this);
         if (this.dude.catched) {
             delete this.dude.catched;
-            this.addModal(this, this.goNextLevel);
+            this.addModal(this, this.goNextLevel, this.finishedMessage);
         }
     }
     moveDude() {

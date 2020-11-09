@@ -13,7 +13,22 @@ export default class ShakeLevel extends Level {
                 x: this.game.renderer.width / 2,
                 y: 0,
             }
-        }
+        };
+        this.ideaMessages = [
+            'He is hanging',
+            'Shake the tree!',
+            'Shake your phone'
+        ];
+        this.finishedMessage = {
+            title: {
+                text: "Excelent!",
+                style: {}
+            },
+            body: {
+                text: "It was easy?",
+                style: {}
+            }
+        };
         this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
     }
@@ -40,11 +55,11 @@ export default class ShakeLevel extends Level {
             this.dude = this.physics.add.sprite(
                 this.config.dude.x,
                 this.config.dude.y,
-                'dude')
-                .setBounce(1).setCollideWorldBounds(true)
+                'dude', 4)
+                .setScale(1.5).setBounce(1).setCollideWorldBounds(true)
                 .setInteractive().on('pointerdown', () => {
                     this.dude.destroy(this);
-                    this.addModal(this, this.goNextLevel);
+                    this.addModal(this, this.goNextLevel, this.finishedMessage);
                 }, this);
             window.removeEventListener('shake', this.appearDude, false);
             this.shake.stop();

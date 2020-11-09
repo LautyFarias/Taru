@@ -2,7 +2,7 @@ import MenuScreen from "./menu-screen.js";
 import IdeaButton from "../../objects/idea-button.js";
 export default class Level extends MenuScreen {
     addLevelBg() {
-        this.bg = this.add.image(
+        return this.add.image(
             this.game.config.custom.bg.x,
             this.game.config.custom.bg.y,
             'level-bg'
@@ -13,7 +13,7 @@ export default class Level extends MenuScreen {
         data = this.game.config.custom.ideaButton,
         modal = this.game.config.custom.modal
     ) {
-        scene.children.add(new IdeaButton(scene, action, data, modal));
+        return scene.children.add(new IdeaButton(scene, action, data));
     }
     goNextLevel() {
         let scene = this.scene;
