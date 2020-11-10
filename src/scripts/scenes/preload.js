@@ -6,7 +6,10 @@ export default class Preload extends Phaser.Scene {
                 x: 0,
                 y: 0,
                 origin: 0,
-                img: 'level-bg-2.png'
+                img: 'menu-bg.png'
+            },
+            levelBg: {
+                img: 'level-bg.png'
             },
             defaultButton: {
                 width: 200,
@@ -62,9 +65,9 @@ export default class Preload extends Phaser.Scene {
         * 
         * image(name, path)
         */
-        this.load.setBaseURL("assets")
+        this.load
             .image('menu-bg', 'images/' + this.game.config.custom.bg.img)
-            .image('level-bg', 'images/' + this.game.config.custom.bg.img)
+            .image('level-bg', 'images/' + this.game.config.custom.levelBg.img)
             .image('idea-button', 'images/' + this.game.config.custom.ideaButton.img)
             .image('return-button', 'images/' + this.game.config.custom.returnButton.img)
             .image('play-button', 'images/button.png')

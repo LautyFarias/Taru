@@ -31,7 +31,7 @@ export default class IntroLevel extends Level {
         if (props.callback) props.callback(this);
     }
     preload() {
-        this.load.setBaseURL('assets').spritesheet(
+        this.load.spritesheet(
             'dude', 'images/dude.png',
             { frameWidth: 32, frameHeight: 48 }
         );
