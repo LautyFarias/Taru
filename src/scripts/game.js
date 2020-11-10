@@ -66,7 +66,7 @@ var config = {
         LevelFour,
         LevelFive,
         LevelSix,
-        LevelSeven,
+        // LevelSeven,
         LevelEight,
         LevelNine,
         LevelTen,
