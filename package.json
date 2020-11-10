@@ -1,7 +1,7 @@
 {
-  "name": "phaser-game",
+  "name": "taru-adventure",
   "version": "1.0.0",
-  "description": "Phaser 3 game.",
+  "description": "Phaser 3 game to Tecnica 7 (Argentina, Avellaneda) Presentation.",
   "homepage": "https://github.com/LautyFarias/videogame#readme",
   "scripts": {
     "dev": "webpack-dev-server --config webpack/webpack.dev.js",
@@ -20,6 +20,9 @@
     "name": "Lautaro Farias",
     "url": "https://github.com/yandeu"
   },
+  "contributors": [
+    "Edith Mamaní <etmamani@gmail.com>"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/LautyFarias/videogame.git"
