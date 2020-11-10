@@ -1,3 +1,4 @@
+import utils from "../../utils";
 import Level from "../interfaces/level";
 
 export default class HoldPressedLevel extends Level {
@@ -42,7 +43,7 @@ export default class HoldPressedLevel extends Level {
             'dude', 4)
             .setScale(1.5)
             .setInteractive().on("pointerup", () => {
-                this.moveDude();
+                utils.moveDude(this.dude, utils.getRandomPosition(this), this);
             }, this);
 
         this.dude.body.setAllowGravity(false);
@@ -66,12 +67,6 @@ export default class HoldPressedLevel extends Level {
             frameRate: 10,
             repeat: -1
         });
-
-        this.dude.moveTo = this.plugins.get('rexmovetoplugin').add(this.dude, {
-            speed: 400,
-        }).on('complete', function () {
-            this.dude.anims.play('turn', true);
-        }, this);
     }
     update() {
         this.dude.on("dragstart", () => {
@@ -81,29 +76,5 @@ export default class HoldPressedLevel extends Level {
             delete this.dude.catched;
             this.addModal(this, this.goNextLevel, this.finishedMessage);
         }
-    }
-    moveDude() {
-        let randomPosition = this.getRandomPosition();
-        if (randomPosition.x > this.dude.x) {
-            this.dude.anims.play('right', true);
-        }
-        if (randomPosition.x < this.dude.x) {
-            this.dude.anims.play('left', true);
-        }
-        this.dude.moveTo.moveTo(randomPosition.x, randomPosition.y);
-    }
-    getRandomPosition() {
-        let randomX = Phaser.Math.Between(
-            this.game.renderer.width - (this.game.renderer.width - 100),
-            this.game.renderer.width - 100
-        );
-        let randomY = Phaser.Math.Between(
-            this.game.renderer.height - (this.game.renderer.height - 200),
-            this.game.renderer.height - 200
-        );
-        return {
-            x: randomX,
-            y: randomY
-        };
     }
 }

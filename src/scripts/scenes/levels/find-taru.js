@@ -1,3 +1,4 @@
+import utils from "../../utils.js";
 import Level from "../interfaces/level.js";
 
 export default class FindTaru extends Level {
@@ -12,7 +13,7 @@ export default class FindTaru extends Level {
                 x: 600,
                 y: 0
             },
-            starts: {
+            stars: {
                 initialX: 10,
                 incrementalX: 0,
                 initialY: 10,
@@ -38,40 +39,67 @@ export default class FindTaru extends Level {
         this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
     }
-    preload() {
-        this.load.setBaseURL('assets')
-            .spritesheet('dude',
-                'images/dude.png',
-                { frameWidth: 32, frameHeight: 48 }
-            );
-    }
+    preload() { }
     create() {
         this.addLevelBg(this);
         this.addReturnButton(this);
         this.addIdeaButton(this);
 
-        this.dude = this.add.image(
+        this.dude = this.add.sprite(
             this.config.dude.x,
             this.config.dude.y,
             'dude', 4
         ).setScale(1.5).setInteractive().on('pointerdown', () => {
+            this.dude.setVisible(false);
             this.addModal(this, this.goNextLevel, this.finishedMessage);
         });
 
-        this.walls = [];
+        this.anims.create({
+            key: 'left',
+            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'turn',
+            frames: [{ key: 'dude', frame: 4 }],
+            frameRate: 20
+        });
+        this.anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+            frameRate: 10,
+            repeat: -1
+        });
 
-        for (let i = 0; i < this.walls.cant; i++) {
-            this.walls[i] = this.add.image(
-                this.walls.initialX * (i + 1),
-                this.walls.initialY * (i + 1),
+        this.stars = [];
+
+        for (let i = 0, y = 50; y < this.game.renderer.height; i++) {
+            this.stars[i] = this.add.image(
+                100 * i,
+                (i == 9 ? y += 100 : y),
                 'button'
-            ).setInteractive({ draggable: true });
-            this.input.setDraggable(this.walls[i]);
+            ).setScale(0.3).setInteractive({ draggable: true });
+            this.input.setDraggable(this.stars[i]);
+            if (i == 9) i = -1;
         }
 
         this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
             gameObject.x = dragX;
             gameObject.y = dragY;
         });
+
+        this.time.addEvent({
+            delay: 1000,
+            callback: () => {
+                utils.moveDude(this.dude, utils.getRandomPosition(this), this);
+            },
+            callbackScope: this,
+            loop: true
+        });
+
+    }
+    update() {
+
     }
 }

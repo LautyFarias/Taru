@@ -1,7 +1,7 @@
 export default class Preload extends Phaser.Scene {
     init() {
         var customConfig = {
-            startCurrentLevel: 10, // Update this value to unlock all levels
+            startCurrentLevel: 1, // Update this value to unlock all levels
             bg: {
                 x: 0,
                 y: 0,
@@ -49,7 +49,7 @@ export default class Preload extends Phaser.Scene {
             returnButton: {
                 x: 50,
                 y: 50,
-                scale: 0.1,
+                scale: 0.15,
                 depth: 2,
                 img: 'return.png'
             },
@@ -72,12 +72,7 @@ export default class Preload extends Phaser.Scene {
             .image('lvls-dashbrd-btn', 'images/button.png')
             .image('logo', 'images/title.png')
             .spritesheet(
-                'dude', 'images/dude.png',
-                { frameWidth: 32, frameHeight: 48 })
-            .plugin(
-                'rexmovetoplugin',
-                'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexmovetoplugin.min.js',
-                true
+                'dude', 'images/dude.png', { frameWidth: 32, frameHeight: 48 }
             );
         // .audio('menu-music', 'audio/title-screen-music.ext');
     }
