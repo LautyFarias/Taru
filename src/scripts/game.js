@@ -4,6 +4,7 @@ import '@babel/polyfill';
 import ScalePlugin from 'phaser3-rex-plugins/plugins/scale-plugin.js';
 import RoundRectanglePlugin from 'phaser3-rex-plugins/plugins/roundrectangle-plugin.js';
 import PinchPlugin from 'phaser3-rex-plugins/plugins/pinch-plugin';
+import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
 
 import Preload from './scenes/preload.js';
 import TitleScreen from "./scenes/title-screen.js";
@@ -11,10 +12,11 @@ import LevelsDashboard from "./scenes/levels-dashboard.js";
 import Options from "./scenes/options.js";
 import LevelOne from "./scenes/levels/intro-level.js";
 import LevelTwo from "./scenes/levels/hold-pressed-level.js";
+import LevelFour from "./scenes/levels/pinch-level.js";
 import LevelFive from "./scenes/levels/shake-level.js";
 import LevelSix from "./scenes/levels/darkness-level.js";
+import LevelSeven from "./scenes/levels/musical-keyboard.js";
 import LevelNine from "./scenes/levels/push-level.js";
-import LevelFour from "./scenes/levels/pinch-level.js";
 import LevelTen from "./scenes/levels/find-taru.js";
 
 var config = {
@@ -42,7 +44,11 @@ var config = {
                 key: 'rexpinchplugin',
                 plugin: PinchPlugin,
                 start: true
-            }
+            }, {
+                key: 'rexmovetoplugin',
+                plugin: MoveToPlugin,
+                start: true
+            },
         ]
     },
     scale: {
@@ -59,7 +65,7 @@ var config = {
         LevelFour,
         LevelFive,
         LevelSix,
-        // LevelSeven,
+        LevelSeven,
         // LevelEight,
         LevelNine,
         LevelTen,

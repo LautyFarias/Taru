@@ -64,10 +64,9 @@ export default class LevelsDashboard extends MenuScreen {
             ).setScale(this.btnsDta.scale).setTint(0, 0, 0, 0);
 
             if (i <= this.cache.json.get('currentLevel')) {
-                currentLevel = i;
-                this.buttons[i].clearTint().setInteractive().on('pointerdown', (currentLevel) => {
-                    this.scene.start(`level-6`, {
-                        currentLevel: currentLevel,
+                this.buttons[i].clearTint().setInteractive().on('pointerdown', () => {
+                    this.scene.start(`level-${i}`, {
+                        currentLevel: i,
                         callback: scene => scene.cameras.main.fadeIn(1000, 0, 0, 0)
                     });
                 }, this);
