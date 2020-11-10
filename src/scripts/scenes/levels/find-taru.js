@@ -10,8 +10,7 @@ export default class FindTaru extends Level {
     init(props) {
         this.config = {
             dude: {
-                x: 600,
-                y: 0
+                scale: 1.5
             },
             stars: {
                 initialX: 10,
@@ -45,11 +44,13 @@ export default class FindTaru extends Level {
         this.addReturnButton(this);
         this.addIdeaButton(this);
 
+        let randomPosition = utils.getRandomPosition(this);
+
         this.dude = this.add.sprite(
-            this.config.dude.x,
-            this.config.dude.y,
+            randomPosition.x,
+            randomPosition.y,
             'dude', 4
-        ).setScale(1.5).setInteractive().on('pointerdown', () => {
+        ).setScale(this.config.dude.scale).setInteractive().on('pointerdown', () => {
             this.dude.setVisible(false);
             this.addModal(this, this.goNextLevel, this.finishedMessage);
         });

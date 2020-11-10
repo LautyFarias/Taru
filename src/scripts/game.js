@@ -15,7 +15,8 @@ import LevelTwo from "./scenes/levels/hold-pressed-level.js";
 import LevelFour from "./scenes/levels/pinch-level.js";
 import LevelFive from "./scenes/levels/shake-level.js";
 import LevelSix from "./scenes/levels/darkness-level.js";
-import LevelSeven from "./scenes/levels/musical-keyboard.js";
+// import LevelSeven from "./scenes/levels/musical-keyboard.js";
+import LevelEight from "./scenes/levels/sound-level.js";
 import LevelNine from "./scenes/levels/push-level.js";
 import LevelTen from "./scenes/levels/find-taru.js";
 
@@ -66,7 +67,7 @@ var config = {
         LevelFive,
         LevelSix,
         LevelSeven,
-        // LevelEight,
+        LevelEight,
         LevelNine,
         LevelTen,
     ],

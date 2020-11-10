@@ -1,5 +1,3 @@
-import { Scene } from "phaser";
-
 export default {
     getRandomPosition: (scene) => {
         let randomX = Phaser.Math.Between(

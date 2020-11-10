@@ -1,7 +1,7 @@
 export default class Preload extends Phaser.Scene {
     init() {
         var customConfig = {
-            startCurrentLevel: 1, // Update this value to unlock all levels
+            startCurrentLevel: 10, // Update this value to unlock all levels
             bg: {
                 x: 0,
                 y: 0,

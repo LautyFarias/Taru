@@ -1,3 +1,4 @@
+import utils from "../../utils.js";
 import Level from "../interfaces/level.js";
 
 export default class DarknessLevel extends Level {
@@ -9,7 +10,8 @@ export default class DarknessLevel extends Level {
             dude: {
                 x: 550,
                 y: 400,
-                depth: -1
+                depth: -1,
+                scale: 1.5
             },
             spotlight: {
                 x: 400,
@@ -51,8 +53,12 @@ export default class DarknessLevel extends Level {
             });
         });
 
-        this.dude = this.add.image(this.config.dude.x, this.config.dude.y, 'dude', 4)
-            .setScale(1.5).setDepth(this.config.dude.depth).setInteractive();
+        let randomPosition = utils.getRandomPosition(this);
+
+        this.dude = this.add.image(
+            randomPosition.x, randomPosition.y, 'dude', 4)
+            .setScale(this.config.dude.scale).setDepth(this.config.dude.depth)
+            .setInteractive();
 
         let spotlight = this.make.sprite(this.config.spotlight);
 
