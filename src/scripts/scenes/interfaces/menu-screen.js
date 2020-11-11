@@ -6,8 +6,8 @@ export default class MenuScreen extends Phaser.Scene {
         return this.add.image(
             this.game.config.custom.bg.x,
             this.game.config.custom.bg.y,
-            'menu-bg'
-        ).setOrigin(this.game.config.custom.bg.origin);
+            'menu-bg')
+            .setOrigin(this.game.config.custom.bg.origin);
     }
     addButton(scene, action, text, data = this.game.config.custom.defaultButton) {
         return scene.children.add(new Button(scene, data, action, text));

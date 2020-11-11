@@ -14,7 +14,7 @@ export default class TitleScreen extends MenuScreen {
         this.config = {
             logo: {
                 x: this.game.renderer.width / 2,
-                y: 200
+                y: this.game.renderer.height / 6
             },
             playButton: {
                 width: this.game.config.custom.defaultButton.width,
@@ -45,8 +45,7 @@ export default class TitleScreen extends MenuScreen {
          * image(x, y, name)
          * setOrigin(where start the image render)
          */
-        this.addBg(this);
-
+        this.bg = this.addBg(this);
         // this.music = this.sound.add('menu-music');	
         // if (this.sound.context.state === 'suspended') {
         //     this.sound.context.resume();
@@ -56,7 +55,7 @@ export default class TitleScreen extends MenuScreen {
         //     loop: true
         // });
 
-        this.add.image(this.config.logo.x, this.config.logo.y, 'logo');
+        this.title = this.add.image(this.config.logo.x, this.config.logo.y, 'logo');
 
         /**
          * 
@@ -85,5 +84,15 @@ export default class TitleScreen extends MenuScreen {
         //         callback: scene => scene.cameras.main.fadeIn(1000, 0, 0, 0)
         //     });
         // }, "Options", this.config.optionsButton);
+    }
+    update() {
+        this.bg.setDisplaySize(this.game.renderer.width, this.game.renderer.height);
+        this.title.setDisplaySize(
+            this.game.renderer.width / 1.5,
+            this.game.renderer.height / 6
+        ).setPosition(
+            this.game.renderer.width / 2,
+            this.game.renderer.height / 6
+        );
     }
 }

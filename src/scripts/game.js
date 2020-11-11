@@ -20,59 +20,86 @@ import LevelEight from "./scenes/levels/sound-level.js";
 import LevelNine from "./scenes/levels/push-level.js";
 import LevelTen from "./scenes/levels/find-taru.js";
 
-var config = {
-    /** Game configs */
-    type: Phaser.AUTO,
-    // TODO: hacer responsive
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 300 },
-            debug: false
-        }
-    },
-    plugins: {
-        global: [
-            {
-                key: 'rexRoundRectanglePlugin',
-                plugin: RoundRectanglePlugin,
-                start: true
-            }, {
-                key: 'rexscaleplugin',
-                plugin: ScalePlugin,
-                start: true
-            }, {
-                key: 'rexpinchplugin',
-                plugin: PinchPlugin,
-                start: true
-            }, {
-                key: 'rexmovetoplugin',
-                plugin: MoveToPlugin,
-                start: true
-            },
-        ]
-    },
-    scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 600,
-        height: 800
-    },
-    scene: [
-        Preload, TitleScreen, LevelsDashboard, Options,
-        LevelOne,
-        LevelTwo,
-        // LevelThree,
-        LevelFour,
-        LevelFive,
-        LevelSix,
-        // LevelSeven,
-        LevelEight,
-        LevelNine,
-        LevelTen,
-    ],
-};
+(() => {
+    const ZOOM_LEVEL = 1;
 
-window.addEventListener('load', () => {
-    const game = new Phaser.Game(config);
-});
+    var config = {
+        /** Game configs */
+        type: Phaser.AUTO,
+        pixelArt: true,
+        // TODO: hacer responsive
+        physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: { y: 300 },
+                debug: false
+            }
+        },
+        plugins: {
+            global: [
+                {
+                    key: 'rexRoundRectanglePlugin',
+                    plugin: RoundRectanglePlugin,
+                    start: true
+                }, {
+                    key: 'rexscaleplugin',
+                    plugin: ScalePlugin,
+                    start: true
+                }, {
+                    key: 'rexpinchplugin',
+                    plugin: PinchPlugin,
+                    start: true
+                }, {
+                    key: 'rexmovetoplugin',
+                    plugin: MoveToPlugin,
+                    start: true
+                },
+            ]
+        },
+        loader: {
+            baseURL: "assets",
+        },
+        scale: {
+            mode: Phaser.Scale.NONE,
+            autoCenter: Phaser.Scale.CENTER_BOTH,
+            width: window.innerWidth / ZOOM_LEVEL,
+            height: window.innerHeight / ZOOM_LEVEL,
+            zoom: ZOOM_LEVEL,
+            parent: "phaser-game"
+        },
+        scene: [
+            Preload, TitleScreen, LevelsDashboard, Options,
+            LevelOne,
+            LevelTwo,
+            // LevelThree,
+            LevelFour,
+            LevelFive,
+            LevelSix,
+            // LevelSeven,
+            LevelEight,
+            LevelNine,
+            LevelTen,
+        ],
+    };
+
+    window.addEventListener('load', () => {
+        const game = new Phaser.Game(config);
+        if (window.innerWidth > 800) {
+            game.scale.resize(800, window.innerHeight / ZOOM_LEVEL);
+        } else {
+            game.scale.resize(
+                window.innerWidth / ZOOM_LEVEL,
+                window.innerHeight / ZOOM_LEVEL
+            );
+        }
+        window.addEventListener("resize", () => {
+            game.scale.resize(
+                window.innerWidth / ZOOM_LEVEL,
+                window.innerHeight / ZOOM_LEVEL
+            );
+            if (window.width > 800) {
+                game.scale.resize(800, window.innerHeight / ZOOM_LEVEL);
+            }
+        }, false);
+    });
+})();
