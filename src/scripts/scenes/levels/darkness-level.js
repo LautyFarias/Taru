@@ -76,4 +76,7 @@ export default class DarknessLevel extends Level {
             yoyo: true
         });
     }
+    update() {
+        this.resizeLevelBg(this.bg);
+    }
 }

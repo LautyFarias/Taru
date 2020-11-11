@@ -37,7 +37,7 @@ export default class IntroLevel extends Level {
         );
     }
     create() {
-        this.addLevelBg(this);
+        this.bg = this.addLevelBg(this);
         this.addReturnButton(this);
         this.addIdeaButton(this);
 
@@ -49,5 +49,8 @@ export default class IntroLevel extends Level {
             .setInteractive().on('pointerdown', () => {
                 this.addModal(this, this.goNextLevel, this.finishedMessage);
             });
+    }
+    update() {
+        this.resizeLevelBg(this.bg);
     }
 }

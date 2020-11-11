@@ -12,7 +12,7 @@ export default class FindTaru extends Level {
             dude: {
                 scale: 1.5
             },
-            stars: {
+            clouds: {
                 initialX: 10,
                 incrementalX: 0,
                 initialY: 10,
@@ -21,9 +21,9 @@ export default class FindTaru extends Level {
             }
         };
         this.ideaMessages = [
-            'Draggin the stars!',
+            'Draggin the clouds!',
             'You have to are fast!',
-            'He moves between the stars!'
+            'He moves between the clouds!'
         ];
         this.finishedMessage = {
             title: {
@@ -40,7 +40,8 @@ export default class FindTaru extends Level {
     }
     preload() { }
     create() {
-        this.addLevelBg(this);
+        this.bg = this.addLevelBg(this);
+        
         this.addReturnButton(this);
         this.addIdeaButton(this);
 
@@ -73,15 +74,15 @@ export default class FindTaru extends Level {
             repeat: -1
         });
 
-        this.stars = [];
+        this.clouds = [];
 
         for (let i = 0, y = 50; y < this.game.renderer.height; i++) {
-            this.stars[i] = this.add.image(
-                100 * i,
+            this.clouds[i] = this.add.image(
+                this.game.renderer.width / 6 * i,
                 (i == 9 ? y += 100 : y),
-                'button'
-            ).setScale(0.3).setInteractive({ draggable: true });
-            this.input.setDraggable(this.stars[i]);
+                'cloud'
+            ).setScale(1).setInteractive({ draggable: true });
+            this.input.setDraggable(this.clouds[i]);
             if (i == 9) i = -1;
         }
 
@@ -101,6 +102,6 @@ export default class FindTaru extends Level {
 
     }
     update() {
-
+        this.resizeLevelBg(this.bg)
     }
 }

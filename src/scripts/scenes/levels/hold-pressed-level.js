@@ -31,9 +31,13 @@ export default class HoldPressedLevel extends Level {
         this.cache.json.add('currentLevel', this.currentLevel);
         if (props.callback) props.callback(this);
     }
-    preload() { }
+    preload() {
+        this.load.audio(
+            'taru-sound', 'audios/taru_sound.mp3'
+        );
+    }
     create() {
-        this.addLevelBg(this);
+        this.bg = this.addLevelBg(this);
         this.addIdeaButton(this);
         this.addReturnButton(this);
 
@@ -44,6 +48,7 @@ export default class HoldPressedLevel extends Level {
             .setScale(1.5)
             .setInteractive().on("pointerup", () => {
                 utils.moveDude(this.dude, utils.getRandomPosition(this), this);
+                this.sound.play('taru-sound');
             }, this);
 
         this.dude.body.setAllowGravity(false);
@@ -76,5 +81,6 @@ export default class HoldPressedLevel extends Level {
             delete this.dude.catched;
             this.addModal(this, this.goNextLevel, this.finishedMessage);
         }
+        this.resizeLevelBg(this.bg);
     }
 }

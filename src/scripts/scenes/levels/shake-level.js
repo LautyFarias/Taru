@@ -40,7 +40,8 @@ export default class ShakeLevel extends Level {
             );
     }
     create() {
-        this.addLevelBg(this);
+        this.bg = this.addLevelBg(this);
+        
         this.addReturnButton(this);
         this.addIdeaButton(this);
 
@@ -66,5 +67,8 @@ export default class ShakeLevel extends Level {
         };
 
         window.addEventListener('shake', this.appearDude, false);
+    }
+    update() {
+        this.resizeLevelBg(this.bg);
     }
 }

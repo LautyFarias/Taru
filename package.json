@@ -1,7 +1,7 @@
 {
-  "name": "taru-adventure",
+  "name": "taru",
   "version": "1.0.0",
-  "description": "Phaser 3 game to Tecnica 7 (Argentina, Avellaneda) Presentation.",
+  "description": "Phaser 3 game to Tecnica 7 (Argentina, Avellaneda) presentation.",
   "homepage": "https://github.com/LautyFarias/videogame#readme",
   "scripts": {
     "dev": "webpack-dev-server --config webpack/webpack.dev.js",

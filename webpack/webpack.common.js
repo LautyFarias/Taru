@@ -29,7 +29,7 @@ module.exports = {
     }
   },
   plugins: [
-    new HtmlWebpackPlugin({ gameName: 'Taru\'s Adventure', template: 'src/index.html' }),
+    new HtmlWebpackPlugin({ gameName: 'Taru', template: 'src/index.html' }),
     new CopyWebpackPlugin([
       { from: 'src/assets', to: 'assets' },
       { from: 'pwa', to: '' },

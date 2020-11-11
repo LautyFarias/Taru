@@ -84,5 +84,6 @@ export default class SoundLevel extends Level {
                 this.pip.setRate(0.5);
             }
         }, this);
+        this.resizeLevelBg(this.bg);
     }
 }

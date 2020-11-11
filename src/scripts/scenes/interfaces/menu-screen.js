@@ -18,4 +18,10 @@ export default class MenuScreen extends Phaser.Scene {
     addReturnButton(scene, action, data = this.game.config.custom.returnButton) {
         return scene.children.add(new ReturnButton(scene, action, data));
     }
+    resizeBg(bg) {
+        bg.setDisplaySize(
+            bg.scene.game.renderer.width,
+            bg.scene.game.renderer.height
+        );
+    }
 }

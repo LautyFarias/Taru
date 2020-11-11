@@ -39,7 +39,7 @@ export default class PinchLevel extends Level {
         );
     }
     create() {
-        this.addLevelBg(this);
+        this.bg = this.addLevelBg(this);
         this.addReturnButton(this);
         this.addIdeaButton(this);
 
@@ -67,5 +67,8 @@ export default class PinchLevel extends Level {
                 }, this);
             }
         }, this);
+    }
+    update() {
+        this.resizeLevelBg(this.bg);
     }
 }

@@ -17,26 +17,20 @@ export default class TitleScreen extends MenuScreen {
                 y: this.game.renderer.height / 6
             },
             playButton: {
-                width: this.game.config.custom.defaultButton.width,
-                height: this.game.config.custom.defaultButton.height,
                 x: this.game.renderer.width / 2,
-                y: 400,
-                color: this.game.config.custom.defaultButton.color,
+                y: 450,
             },
             lvlsDashbrdBtn: {
-                width: this.game.config.custom.defaultButton.width,
-                height: this.game.config.custom.defaultButton.height,
                 x: this.game.renderer.width / 2,
-                y: 550,
-                color: this.game.config.custom.defaultButton.color,
+                y: 650,
             },
-            optionsButton: {
-                width: this.game.config.custom.defaultButton.width,
-                height: this.game.config.custom.defaultButton.height,
-                x: this.game.renderer.width - this.game.renderer.width / 4,
-                y: 550,
-                color: this.game.config.custom.defaultButton.color,
-            }
+            // optionsButton: {
+            //     width: this.game.config.custom.defaultButton.width,
+            //     height: this.game.config.custom.defaultButton.height,
+            //     x: this.game.renderer.width - this.game.renderer.width / 4,
+            //     y: 550,
+            //     color: this.game.config.custom.defaultButton.color,
+            // }
         };
     }
     preload() { }
@@ -86,7 +80,7 @@ export default class TitleScreen extends MenuScreen {
         // }, "Options", this.config.optionsButton);
     }
     update() {
-        this.bg.setDisplaySize(this.game.renderer.width, this.game.renderer.height);
+        this.resizeBg(this.bg);
         this.title.setDisplaySize(
             this.game.renderer.width / 1.5,
             this.game.renderer.height / 6
