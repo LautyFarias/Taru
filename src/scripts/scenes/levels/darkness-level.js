@@ -21,24 +21,14 @@ export default class DarknessLevel extends Level {
             }
         };
         this.finishedMessage = {
-            title: {
-                text: "Excelent!",
-                style: {}
-            },
-            body: {
-                text: "It was easy?",
-                style: {}
-            }
+            title: "Excelent!",
+            body: "It was easy?"
         };
         this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
     }
     preload() {
-        this.load.setBaseURL('assets')
-            .spritesheet(
-                'dude', 'images/dude.png',
-                { frameWidth: 32, frameHeight: 48 })
-            .image('linter', 'images/linter.png');
+        this.load.image('linter', 'images/linter.png');
     }
     create() {
         this.bg = this.addLevelBg(this);

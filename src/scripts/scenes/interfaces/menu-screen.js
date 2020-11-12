@@ -12,8 +12,8 @@ export default class MenuScreen extends Phaser.Scene {
     addButton(scene, action, text, data = this.game.config.custom.defaultButton) {
         return scene.children.add(new Button(scene, data, action, text));
     }
-    addModal(scene, action, text, data = this.game.config.custom.modal) {
-        return scene.children.add(new Modal(scene, action, text, data));
+    addModal(scene, action, text, time, data = this.game.config.custom.modal) {
+        return scene.children.add(new Modal(scene, action, text, data, time));
     }
     addReturnButton(scene, action, data = this.game.config.custom.returnButton) {
         return scene.children.add(new ReturnButton(scene, action, data));

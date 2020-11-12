@@ -18,14 +18,8 @@ export default class HoldPressedLevel extends Level {
             'Hold clicked the dude'
         ];
         this.finishedMessage = {
-            title: {
-                text: "Excelent!",
-                style: {}
-            },
-            body: {
-                text: "It was easy?",
-                style: {}
-            }
+            title: "Excelent!",
+            body: "It was easy?"
         };
         this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         this.cache.json.add('currentLevel', this.currentLevel);

@@ -13,21 +13,22 @@ export default {
             y: randomY
         };
     },
-    moveDude: (dude, randomPosition, scene) => {
+    moveDude: (dude, position, callback) => {
         if (!dude.moveTo) {
-            dude.moveTo = scene.plugins.get('rexmovetoplugin').add(dude, {
+            dude.moveTo = dude.scene.plugins.get('rexmovetoplugin').add(dude, {
                 speed: 400,
             }).on('complete', function () {
                 dude.anims.play('turn', true);
-            }, scene);
+            }, dude.scene);
         }
 
-        if (randomPosition.x > dude.x) {
+        if (position.x > dude.x) {
             dude.anims.play('right', true);
         }
-        if (randomPosition.x < dude.x) {
+        if (position.x < dude.x) {
             dude.anims.play('left', true);
         }
-        dude.moveTo.moveTo(randomPosition.x, randomPosition.y);
+        dude.moveTo.moveTo(position.x, position.y);
+        if (callback) dude.moveTo.on('complete', callback);
     }
 };

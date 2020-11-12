@@ -14,17 +14,14 @@ export default class IdeaLevel extends Level {
         };
         this.countIdeas = -1;
         this.ideaMessages = [
-            "One?", "Two??", "This is the last idea?", "Take this away of mi face!"
+            "One?",
+            "Two??",
+            "This is the last idea?",
+            "Take this away of mi face!"
         ];
         this.finishedMessage = {
-            title: {
-                text: "Default Title",
-                style: {}
-            },
-            body: {
-                text: "Default body",
-                style: {}
-            }
+            title: "Default Title",
+            body: "Default body"
         };
         this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
@@ -51,15 +48,7 @@ export default class IdeaLevel extends Level {
             }
             this.ideaModal = this.addModal(this, () => {
                 this.ideaButton.setInteractive().clearTint();
-            }, {
-                title: {
-                    text: "",
-                    styles: {}
-                }, body: {
-                    text: this.ideaMessages[this.countIdeas],
-                    styles: {}
-                }
-            });
+            }, { body: this.ideaMessages[this.countIdeas] });
         });
     }
     update() {

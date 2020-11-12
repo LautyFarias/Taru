@@ -60,7 +60,7 @@ export default class LevelsDashboard extends MenuScreen {
                 'level-button'
             ).setScale(this.config.btns.scale).setTint(0, 0, 0, 0);
 
-            if (i <= this.cache.json.get('currentLevel')) {
+            if (i <= this.cache.json.get('levelUnlocked')) {
                 this.buttons[i].clearTint().setInteractive().on('pointerdown', () => {
                     this.scene.start(`level-${i}`, {
                         currentLevel: i,

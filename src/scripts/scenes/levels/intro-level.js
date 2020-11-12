@@ -16,25 +16,16 @@ export default class IntroLevel extends Level {
             'It is front',
             'Click the ******* dude!'
         ];
-        this.finishedMessage = {
-            title: {
-                text: "Excelent!",
-                style: {}
-            },
-            body: {
-                text: "Was it easy?",
-                style: {}
-            }
-        };
+        this.introMessages = [
+            { body: 'Hey! I am very difficult to catch, did you know?' },
+            { body: 'You do not believe me?' },
+            { body: 'Do you want to try?' },
+            { body: 'Here we go!' }
+        ];
+        this.introMessagesCount = 0;
         this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         this.cache.json.add('currentLevel', this.currentLevel);
         if (props.callback) props.callback(this);
-    }
-    preload() {
-        this.load.spritesheet(
-            'dude', 'images/dude.png',
-            { frameWidth: 32, frameHeight: 48 }
-        );
     }
     create() {
         this.bg = this.addLevelBg(this);
@@ -47,7 +38,13 @@ export default class IntroLevel extends Level {
             'dude', 4)
             .setScale(1.5)
             .setInteractive().on('pointerdown', () => {
-                this.addModal(this, this.goNextLevel, this.finishedMessage);
+                this.addModal(
+                    this,
+                    this.introMessagesCount == this.introMessages.length - 1 ? this.goNextLevel : null,
+                    this.introMessages[this.introMessagesCount],
+                    300
+                );
+                this.introMessagesCount++;
             });
     }
     update() {

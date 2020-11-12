@@ -18,11 +18,11 @@ export default class TitleScreen extends MenuScreen {
             },
             playButton: {
                 x: this.game.renderer.width / 2,
-                y: 450,
+                y: this.game.renderer.height / 2,
             },
             lvlsDashbrdBtn: {
                 x: this.game.renderer.width / 2,
-                y: 650,
+                y: this.game.renderer.height / 2 + 150,
             },
             // optionsButton: {
             //     width: this.game.config.custom.defaultButton.width,

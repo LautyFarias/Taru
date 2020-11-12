@@ -26,14 +26,8 @@ export default class FindTaru extends Level {
             'He moves between the clouds!'
         ];
         this.finishedMessage = {
-            title: {
-                text: "Excelent!",
-                style: {}
-            },
-            body: {
-                text: "It was easy?",
-                style: {}
-            }
+            title: "Excelent!",
+            body: "It was easy?"
         };
         this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
@@ -41,7 +35,7 @@ export default class FindTaru extends Level {
     preload() { }
     create() {
         this.bg = this.addLevelBg(this);
-        
+
         this.addReturnButton(this);
         this.addIdeaButton(this);
 
@@ -94,7 +88,7 @@ export default class FindTaru extends Level {
         this.time.addEvent({
             delay: 1000,
             callback: () => {
-                utils.moveDude(this.dude, utils.getRandomPosition(this), this);
+                utils.moveDude(this.dude, utils.getRandomPosition(this));
             },
             callbackScope: this,
             loop: true
