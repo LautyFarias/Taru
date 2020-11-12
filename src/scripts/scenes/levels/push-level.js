@@ -15,9 +15,9 @@ export default class PushLevel extends Level {
             }
         };
         this.ideaMessages = [
-            'Why not wait?',
-            'Maybe you get a message',
-            'Look your notifications'
+            'Why don\'t you wait?',
+            'Maybe you\'ll get a message',
+            'Look at your notifications'
         ];
         this.finishedMessage = {
             title: "Excelent!",

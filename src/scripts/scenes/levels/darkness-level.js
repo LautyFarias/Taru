@@ -22,7 +22,7 @@ export default class DarknessLevel extends Level {
         };
         this.finishedMessage = {
             title: "Excelent!",
-            body: "It was easy?"
+            body: "Was it easy?"
         };
         this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);

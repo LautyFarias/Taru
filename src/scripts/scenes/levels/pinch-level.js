@@ -15,7 +15,7 @@ export default class PinchLevel extends Level {
             }
         };
         this.ideaMessages = [
-            'Now I understand that you don\'t see it',
+            'I understand now that you don\'t see it',
             'It is very small',
             'You have to pinch the screen'
         ];

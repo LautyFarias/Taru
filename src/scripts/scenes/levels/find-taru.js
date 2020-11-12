@@ -21,13 +21,13 @@ export default class FindTaru extends Level {
             }
         };
         this.ideaMessages = [
-            'Draggin the clouds!',
-            'You have to are fast!',
+            'Drag the clouds!',
+            'You have to be fast!',
             'He moves between the clouds!'
         ];
         this.finishedMessage = {
             title: "Excelent!",
-            body: "It was easy?"
+            body: "Was it easy?"
         };
         this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);

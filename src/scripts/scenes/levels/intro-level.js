@@ -12,13 +12,13 @@ export default class IntroLevel extends Level {
             }
         };
         this.ideaMessages = [
-            'You have vision problems?',
-            'It is front',
+            'Do you have vision problems?',
+            "It's in front of you",
             'Click the ******* dude!'
         ];
         this.introMessages = [
-            { body: 'Hey! I am very difficult to catch, did you know?' },
-            { body: 'You do not believe me?' },
+            { body: 'Hey! I am very difficult to catch, did you know that?' },
+            { body: "You don't believe me?" },
             { body: 'Do you want to try?' },
             { body: 'Here we go!' }
         ];

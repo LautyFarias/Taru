@@ -13,9 +13,9 @@ export default class HoldPressedLevel extends Level {
             }
         };
         this.ideaMessages = [
-            'It is slippery',
-            'Strangle it!',
-            'Hold clicked the dude'
+            "It's sneaky",
+            'Catch it!',
+            'Keep the dude clicked'
         ];
         this.finishedMessage = {
             title: "Excelent!",

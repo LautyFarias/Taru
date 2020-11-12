@@ -16,8 +16,8 @@ export default class IdeaLevel extends Level {
         this.ideaMessages = [
             "One?",
             "Two??",
-            "This is the last idea?",
-            "Take this away of mi face!"
+            "This is the last tip!",
+            "Take this off my face!"
         ];
         this.finishedMessage = {
             title: "Default Title",

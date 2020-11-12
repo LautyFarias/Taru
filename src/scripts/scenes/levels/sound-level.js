@@ -8,7 +8,7 @@ export default class SoundLevel extends Level {
     init(props) {
         this.config = {};
         this.ideaMessages = [
-            "Maybe you have to enable sound, maybe...",
+            "Maybe you should enable your sound, just maybe...",
             "Hot, Cold, Hot, Cold. You understand me?",
             "The closer, more acute"
         ];
