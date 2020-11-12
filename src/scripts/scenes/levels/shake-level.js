@@ -20,14 +20,8 @@ export default class ShakeLevel extends Level {
             'Shake your phone'
         ];
         this.finishedMessage = {
-            title: {
-                text: "Excelent!",
-                style: {}
-            },
-            body: {
-                text: "It was easy?",
-                style: {}
-            }
+            title: "Excelent!",
+            body: "It was easy?"
         };
         this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
@@ -40,7 +34,8 @@ export default class ShakeLevel extends Level {
             );
     }
     create() {
-        this.addLevelBg(this);
+        this.bg = this.addLevelBg(this);
+
         this.addReturnButton(this);
         this.addIdeaButton(this);
 
@@ -66,5 +61,8 @@ export default class ShakeLevel extends Level {
         };
 
         window.addEventListener('shake', this.appearDude, false);
+    }
+    update() {
+        this.resizeLevelBg(this.bg);
     }
 }

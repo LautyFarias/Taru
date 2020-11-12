@@ -12,19 +12,9 @@ export default class IdeaButton extends Phaser.GameObjects.Image {
 
     }
     showIdeaModal() {
-        if (this.countIdeas < this.scene.ideaMessages.length - 1) {
-            this.countIdeas++;
-        }
-        this.ideaModal = this.scene.addModal(this.scene, () => {
+        if (this.countIdeas < this.scene.ideaMessages.length - 1) this.countIdeas++;
+        this.modal = this.scene.addModal(this.scene, () => {
             this.setInteractive().clearTint();
-        }, {
-            title: {
-                text: "",
-                styles: {}
-            }, body: {
-                text: this.scene.ideaMessages[this.countIdeas],
-                styles: {}
-            }
-        });
+        }, { body: this.scene.ideaMessages[this.countIdeas] });
     }
 }

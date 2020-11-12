@@ -1,7 +1,7 @@
 export default class Preload extends Phaser.Scene {
     init() {
         var customConfig = {
-            startCurrentLevel: 10, // Update this value to unlock all levels
+            levelUnlocked: 10, // Update this value to unlock all levels
             bg: {
                 x: 0,
                 y: 0,
@@ -23,20 +23,14 @@ export default class Preload extends Phaser.Scene {
                 y: this.game.renderer.height / 2,
                 color: 0x00bcd4,
                 depth: 3,
-                defaultContent: {
-                    title: {
-                        text: "Default Title",
-                        style: {}
-                    },
-                    body: {
-                        text: "Default body",
-                        style: {}
-                    }
+                contentStyle: {
+                    title: {},
+                    body: {}
                 }
             },
             ideaButton: {
-                x: this.game.renderer.width - 50,
-                y: 50,
+                x: this.game.renderer.width - this.game.renderer.width / 14,
+                y: this.game.renderer.height / 14,
                 scale: 0.1,
                 depth: 2,
                 img: 'lamp.png',
@@ -50,8 +44,8 @@ export default class Preload extends Phaser.Scene {
                 }
             },
             returnButton: {
-                x: 50,
-                y: 50,
+                x: this.game.renderer.width / 10,
+                y: this.game.renderer.height / 14,
                 scale: 0.15,
                 depth: 2,
                 img: 'return.png'
@@ -70,10 +64,9 @@ export default class Preload extends Phaser.Scene {
             .image('level-bg', 'images/' + this.game.config.custom.levelBg.img)
             .image('idea-button', 'images/' + this.game.config.custom.ideaButton.img)
             .image('return-button', 'images/' + this.game.config.custom.returnButton.img)
-            .image('play-button', 'images/button.png')
-            .image('options-button', 'images/button.png')
-            .image('lvls-dashbrd-btn', 'images/button.png')
+            .image('button', 'images/button.png')
             .image('logo', 'images/title.png')
+            .image('cloud', 'images/cloud.png')
             .spritesheet(
                 'dude', 'images/dude.png', { frameWidth: 32, frameHeight: 48 }
             );
@@ -81,11 +74,10 @@ export default class Preload extends Phaser.Scene {
     }
     create() {
 
-        if (!this.cache.json.exists("currentLevel")) {
-            this.cache.json.add(
-                "currentLevel", this.game.config.custom.startCurrentLevel
-            );
-        }
+        if (!this.cache.json.exists("currentLevel")) this.cache.json.add("currentLevel", 1);
+        if (!this.cache.json.exists("levelUnlocked")) this.cache.json.add(
+            "levelUnlocked", this.game.config.custom.levelUnlocked
+        );
 
         this.input.mouse.disableContextMenu();
         this.scene.start('title-screen');

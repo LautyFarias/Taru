@@ -12,13 +12,16 @@ import LevelsDashboard from "./scenes/levels-dashboard.js";
 import Options from "./scenes/options.js";
 import LevelOne from "./scenes/levels/intro-level.js";
 import LevelTwo from "./scenes/levels/hold-pressed-level.js";
+import LevelThree from './scenes/levels/idea-level.js';
 import LevelFour from "./scenes/levels/pinch-level.js";
 import LevelFive from "./scenes/levels/shake-level.js";
 import LevelSix from "./scenes/levels/darkness-level.js";
-// import LevelSeven from "./scenes/levels/musical-keyboard.js";
+import LevelSeven from "./scenes/levels/musical-keyboard-level.js";
 import LevelEight from "./scenes/levels/sound-level.js";
 import LevelNine from "./scenes/levels/push-level.js";
 import LevelTen from "./scenes/levels/find-taru.js";
+import FinalSceneLevel from './scenes/levels/final-scene-level.js';
+
 
 (() => {
     const ZOOM_LEVEL = 1;
@@ -71,14 +74,15 @@ import LevelTen from "./scenes/levels/find-taru.js";
             Preload, TitleScreen, LevelsDashboard, Options,
             LevelOne,
             LevelTwo,
-            // LevelThree,
+            LevelThree,
             LevelFour,
             LevelFive,
             LevelSix,
-            // LevelSeven,
+            LevelSeven,
             LevelEight,
             LevelNine,
             LevelTen,
+            FinalSceneLevel
         ],
     };
 

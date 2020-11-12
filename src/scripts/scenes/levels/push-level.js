@@ -20,32 +20,22 @@ export default class PushLevel extends Level {
             'Look your notifications'
         ];
         this.finishedMessage = {
-            title: {
-                text: "Excelent!",
-                style: {}
-            },
-            body: {
-                text: "It was easy?",
-                style: {}
-            }
+            title: "Excelent!",
+            body: "It was easy?"
         };
         this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
     }
-    preload() {
-        this.load.setBaseURL('../../../assets').spritesheet(
-            'dude', 'images/dude.png',
-            { frameWidth: 32, frameHeight: 48 }
-        );
-    }
+    preload() { }
     create() {
-        this.addLevelBg(this);
+        this.bg = this.addLevelBg(this);
+
         this.addReturnButton(this);
         this.addIdeaButton(this);
 
         this.sendNotification = () => {
             Push.create("You found me!", {
-                icon: this.load.baseURL + '/images/lamp.png',
+                icon: 'icons/icon-48x48.png',
                 requireIteraction: true,
                 silent: true,
                 onClick: this.notificationCallback
@@ -65,5 +55,8 @@ export default class PushLevel extends Level {
         };
 
         setTimeout(this.sendNotification, 3000);
+    }
+    update() {
+        this.resizeLevelBg(this.bg);
     }
 }

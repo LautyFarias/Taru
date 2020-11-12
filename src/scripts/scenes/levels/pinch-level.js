@@ -20,14 +20,8 @@ export default class PinchLevel extends Level {
             'You have to pinch the screen'
         ];
         this.finishedMessage = {
-            title: {
-                text: "Excelent!",
-                style: {}
-            },
-            body: {
-                text: "It was easy?",
-                style: {}
-            }
+            title: "Excelent!",
+            body: "It was easy?"
         };
         this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
@@ -39,7 +33,7 @@ export default class PinchLevel extends Level {
         );
     }
     create() {
-        this.addLevelBg(this);
+        this.bg = this.addLevelBg(this);
         this.addReturnButton(this);
         this.addIdeaButton(this);
 
@@ -67,5 +61,8 @@ export default class PinchLevel extends Level {
                 }, this);
             }
         }, this);
+    }
+    update() {
+        this.resizeLevelBg(this.bg);
     }
 }
