@@ -3,7 +3,7 @@ import Push from 'push.js';
 export default class Preload extends Phaser.Scene {
     init() {
         var customConfig = {
-            levelUnlocked: 10, // Update this value to unlock all levels
+            levelUnlocked: 1, // Update this value to unlock all levels
             bg: {
                 x: 0,
                 y: 0,
