@@ -13,12 +13,13 @@ export default class MusicalKeyboard extends Level {
         this.finishedMessages = {
             title: "",
             body: "",
-        }
+        };
         this.notes = ["mi", "mi", "mi", "mi", "re", "mi", "la", "mi", "re", "re"];
         if (props.callback) props.callback(this);
     }
     preload() {
         this.load.atlas('piano', 'images/piano.png', 'json/piano.json')
+            .image('sheet', 'images/sheet.png')
             .audio('C3', 'audios/piano/C3.mp3')
             .audio('Db3', 'audios/piano/Db3.mp3')
             .audio('D3', 'audios/piano/D3.mp3')
