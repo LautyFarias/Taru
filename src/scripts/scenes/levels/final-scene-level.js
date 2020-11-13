@@ -3,7 +3,7 @@ import Level from "../interfaces/level.js";
 
 export default class FinalSceneLevel extends Level {
     constructor() {
-        super({ key: "level-11" });
+        super({ key: "level-10" });
     }
     init(props) {
         this.finishedMessages = {
@@ -17,7 +17,7 @@ export default class FinalSceneLevel extends Level {
         if (props.callback) props.callback(this);
     }
     create() {
-        this.bg = this.addLevelBg(this);
+        this.bg = this.addBg(this, 'space-bg');
 
         this.generateDude = () => {
             this.miniDude = this.add.sprite('dude', 4)

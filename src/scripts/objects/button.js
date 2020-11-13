@@ -5,6 +5,8 @@ export default class Button extends Phaser.GameObjects.Image {
             .setInteractive().on("pointerdown", () => {
                 action();
             });
-        scene.add.text(data.x, data.y, text).setOrigin(0.5).setDepth(1);
+        scene.add.text(data.x, data.y, text, {
+            font: "700 2em Roboto"
+        }).setOrigin(0.5).setDepth(1);
     }
 }

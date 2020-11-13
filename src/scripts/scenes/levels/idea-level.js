@@ -23,10 +23,8 @@ export default class IdeaLevel extends Level {
             title: "Default Title",
             body: "Default body"
         };
-        this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
     }
-    preload() { }
     create() {
         this.bg = this.addLevelBg(this);
 

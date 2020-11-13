@@ -18,7 +18,7 @@ import LevelFive from "./scenes/levels/shake-level.js";
 import LevelSix from "./scenes/levels/darkness-level.js";
 import LevelSeven from "./scenes/levels/musical-keyboard-level.js";
 import LevelEight from "./scenes/levels/sound-level.js";
-import LevelNine from "./scenes/levels/push-level.js";
+// import LevelNine from "./scenes/levels/push-level.js";
 import LevelTen from "./scenes/levels/find-taru.js";
 import FinalSceneLevel from './scenes/levels/final-scene-level.js';
 
@@ -80,7 +80,7 @@ import FinalSceneLevel from './scenes/levels/final-scene-level.js';
             LevelSix,
             LevelSeven,
             LevelEight,
-            LevelNine,
+            // LevelNine,
             LevelTen,
             FinalSceneLevel
         ],

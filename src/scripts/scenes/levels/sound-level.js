@@ -16,13 +16,10 @@ export default class SoundLevel extends Level {
             title: "Excelent!",
             body: "It was easy?"
         };
-        this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
     }
     preload() {
-        this.load.setBaseURL("assets").audio(
-            'pip', 'audios/pip.mp3'
-        );
+        this.load.audio('pip', 'audios/pip.mp3');
     }
     create() {
         this.bg = this.addLevelBg(this);

@@ -13,7 +13,7 @@ export default class Modal extends RoundRectangle {
             .once('complete', () => {
                 if (this.content.title) {
                     var title = this.scene.add.text(
-                        this.x, this.y - 100,
+                        this.x, this.y - 75,
                         this.content.title,
                         this.scene.game.config.custom.modal.contentStyle.title
                     ).setOrigin(0.5).setDepth(4);

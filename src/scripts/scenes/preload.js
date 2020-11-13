@@ -1,3 +1,5 @@
+import Push from 'push.js';
+
 export default class Preload extends Phaser.Scene {
     init() {
         var customConfig = {
@@ -11,11 +13,6 @@ export default class Preload extends Phaser.Scene {
             levelBg: {
                 img: 'level-bg.png'
             },
-            defaultButton: {
-                width: 200,
-                height: 100,
-                color: 0x00bcd4,
-            },
             modal: {
                 width: this.game.renderer.width - 100,
                 height: this.game.renderer.height - 500,
@@ -24,8 +21,14 @@ export default class Preload extends Phaser.Scene {
                 color: 0x00bcd4,
                 depth: 3,
                 contentStyle: {
-                    title: {},
-                    body: {}
+                    title: {
+                        font: "700 2em Roboto",
+                        wordWrap: { width: this.game.renderer.width - 200, useAdvancedWrap: true }
+                    },
+                    body: {
+                        font: "400 1.8em Roboto",
+                        wordWrap: { width: this.game.renderer.width - 200, useAdvancedWrap: true }
+                    }
                 }
             },
             ideaButton: {
@@ -62,11 +65,15 @@ export default class Preload extends Phaser.Scene {
         this.load
             .image('menu-bg', 'images/' + this.game.config.custom.bg.img)
             .image('level-bg', 'images/' + this.game.config.custom.levelBg.img)
+            .image('space-bg', 'images/space.png')
             .image('idea-button', 'images/' + this.game.config.custom.ideaButton.img)
             .image('return-button', 'images/' + this.game.config.custom.returnButton.img)
             .image('button', 'images/button.png')
+            .image('level-button', 'images/button-level.png')
+            .image('level-unavailable', 'images/level-unavailable.png')
             .image('logo', 'images/title.png')
             .image('cloud', 'images/cloud.png')
+            .image('cloud2', 'images/cloud2.png')
             .spritesheet(
                 'dude', 'images/dude.png', { frameWidth: 32, frameHeight: 48 }
             );
@@ -80,6 +87,11 @@ export default class Preload extends Phaser.Scene {
         );
 
         this.input.mouse.disableContextMenu();
+            
+        // Push.Permission.request(null, () => {
+        //     alert("Some mechanics may not work properly");
+        // });
+
         this.scene.start('title-screen');
     }
 }

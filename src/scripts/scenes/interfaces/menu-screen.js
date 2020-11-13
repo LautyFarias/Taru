@@ -2,14 +2,14 @@ import ReturnButton from "../../objects/return-button.js";
 import Modal from "../../objects/modal.js";
 import Button from "../../objects/button.js";
 export default class MenuScreen extends Phaser.Scene {
-    addBg() {
-        return this.add.image(
-            this.game.config.custom.bg.x,
-            this.game.config.custom.bg.y,
-            'menu-bg')
-            .setOrigin(this.game.config.custom.bg.origin);
+    addBg(scene, bgKey) {
+        return scene.add.image(
+            scene.game.config.custom.bg.x,
+            scene.game.config.custom.bg.y,
+            bgKey)
+            .setOrigin(scene.game.config.custom.bg.origin);
     }
-    addButton(scene, action, text, data = this.game.config.custom.defaultButton) {
+    addButton(scene, action, text, data) {
         return scene.children.add(new Button(scene, data, action, text));
     }
     addModal(scene, action, text, time, data = this.game.config.custom.modal) {

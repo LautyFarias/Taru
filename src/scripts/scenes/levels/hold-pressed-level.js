@@ -21,14 +21,10 @@ export default class HoldPressedLevel extends Level {
             title: "Excelent!",
             body: "It was easy?"
         };
-        this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
-        this.cache.json.add('currentLevel', this.currentLevel);
         if (props.callback) props.callback(this);
     }
     preload() {
-        this.load.audio(
-            'taru-sound', 'audios/taru_sound.mp3'
-        );
+        this.load.audio('taru-sound', 'audios/taru_sound.mp3');
     }
     create() {
         this.bg = this.addLevelBg(this);
@@ -41,7 +37,7 @@ export default class HoldPressedLevel extends Level {
             'dude', 4)
             .setScale(1.5)
             .setInteractive().on("pointerup", () => {
-                utils.moveDude(this.dude, utils.getRandomPosition(this), this);
+                utils.moveDude(this.dude, utils.getRandomPosition(this));
                 this.sound.play('taru-sound');
             }, this);
 

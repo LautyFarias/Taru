@@ -24,14 +24,13 @@ export default class DarknessLevel extends Level {
             title: "Excelent!",
             body: "Was it easy?"
         };
-        this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
     }
     preload() {
         this.load.image('linter', 'images/linter.png');
     }
     create() {
-        this.bg = this.addLevelBg(this);
+        this.bg = this.addBg(this, 'space-bg');
         this.bg.tint = new Phaser.Display.Color(0, 0, 0);
 
         this.addReturnButton(this);

@@ -11,19 +11,24 @@ export default class Level extends MenuScreen {
     addIdeaButton(
         scene, action,
         data = this.game.config.custom.ideaButton,
-        modal = this.game.config.custom.modal
     ) {
         return scene.children.add(new IdeaButton(scene, action, data));
     }
     goNextLevel() {
-        let scene = this.scene;
+        let thisScene = this.scene;
         this.scene.cameras.main.fadeOut(1000, 0, 0, 0);
         this.scene.cameras.main.once(
             Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-                scene.scene.start(
-                    `level-${(scene.currentLevel + 1)}`, {
-                    currentLevel: scene.currentLevel + 1,
-                    callback: scene => scene.cameras.main.fadeIn(1000, 0, 0, 0)
+                thisScene.scene.start(
+                    `level-${(thisScene.currentLevel + 1)}`, {
+                    callback: scene => {
+                        scene.cache.json.add('currentLevel', thisScene.currentLevel + 1);
+                        scene.currentLevel = scene.cache.json.get('currentLevel');
+                        if (scene.cache.json.get('levelUnlocked') < scene.currentLevel) {
+                            scene.cache.json.add('levelUnlocked', scene.currentLevel);
+                        }
+                        scene.cameras.main.fadeIn(1000, 0, 0, 0);
+                    }
                 });
                 this.destroy();
             });

@@ -13,10 +13,10 @@ export default {
             y: randomY
         };
     },
-    moveDude: (dude, position, callback) => {
+    moveDude: (dude, position, callback, speed) => {
         if (!dude.moveTo) {
             dude.moveTo = dude.scene.plugins.get('rexmovetoplugin').add(dude, {
-                speed: 400,
+                speed: speed ? speed : 400,
             }).on('complete', function () {
                 dude.anims.play('turn', true);
             }, dude.scene);

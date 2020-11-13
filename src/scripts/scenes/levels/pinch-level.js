@@ -23,7 +23,6 @@ export default class PinchLevel extends Level {
             title: "Excelent!",
             body: "It was easy?"
         };
-        this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
     }
     preload() {

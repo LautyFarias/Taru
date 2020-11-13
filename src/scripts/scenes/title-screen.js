@@ -39,7 +39,7 @@ export default class TitleScreen extends MenuScreen {
          * image(x, y, name)
          * setOrigin(where start the image render)
          */
-        this.bg = this.addBg(this);
+        this.bg = this.addBg(this, 'menu-bg');
         // this.music = this.sound.add('menu-music');	
         // if (this.sound.context.state === 'suspended') {
         //     this.sound.context.resume();
@@ -60,16 +60,17 @@ export default class TitleScreen extends MenuScreen {
          */
         this.addButton(this, () => {
             this.scene.start(
-                `level-${this.cache.json.exists('currentLevel') ? this.cache.json.get('currentLevel') : 1}`, {
-                currentLevel: this.cache.json.exists('currentLevel') ? this.cache.json.get('currentLevel') : 1,
-                callback: scene => scene.cameras.main.fadeIn(1000, 0, 0, 0)
+                `level-${this.cache.json.get('currentLevel')}`, {
+                callback: scene => {
+                    scene.currentLevel = parseInt(scene.cache.json.get('currentLevel'));
+                    scene.cameras.main.fadeIn(1000, 0, 0, 0);
+                }
             });
         }, "Play", this.config.playButton);
 
         this.addButton(this, () => {
             this.scene.start("levels-dashboard", {
-                currentLevel: this.cache.json.exists('currentLevel') ? this.cache.json.get('currentLevel') : 1,
-                callback: scene => scene.cameras.main.fadeIn(1000, 0, 0, 0)
+                callback: scene => scene.cameras.main.fadeIn(200, 0, 0, 0)
             });
         }, "Levels", this.config.lvlsDashbrdBtn);
 

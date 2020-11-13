@@ -23,8 +23,6 @@ export default class IntroLevel extends Level {
             { body: 'Here we go!' }
         ];
         this.introMessagesCount = 0;
-        this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
-        this.cache.json.add('currentLevel', this.currentLevel);
         if (props.callback) props.callback(this);
     }
     create() {

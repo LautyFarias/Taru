@@ -4,7 +4,7 @@ import Level from "../interfaces/level.js";
 export default class FindTaru extends Level {
     constructor() {
         super({
-            key: "level-10"
+            key: "level-9"
         });
     }
     init(props) {
@@ -29,10 +29,8 @@ export default class FindTaru extends Level {
             title: "Excelent!",
             body: "Was it easy?"
         };
-        this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
     }
-    preload() { }
     create() {
         this.bg = this.addLevelBg(this);
 
@@ -74,7 +72,7 @@ export default class FindTaru extends Level {
             this.clouds[i] = this.add.image(
                 this.game.renderer.width / 6 * i,
                 (i == 9 ? y += 100 : y),
-                'cloud'
+                i % 2 == 0 ? 'cloud' : 'cloud2'
             ).setScale(1).setInteractive({ draggable: true });
             this.input.setDraggable(this.clouds[i]);
             if (i == 9) i = -1;
@@ -96,6 +94,6 @@ export default class FindTaru extends Level {
 
     }
     update() {
-        this.resizeLevelBg(this.bg)
+        this.resizeLevelBg(this.bg);
     }
 }

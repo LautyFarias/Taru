@@ -23,7 +23,6 @@ export default class PushLevel extends Level {
             title: "Excelent!",
             body: "It was easy?"
         };
-        this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
     }
     preload() { }
@@ -33,11 +32,17 @@ export default class PushLevel extends Level {
         this.addReturnButton(this);
         this.addIdeaButton(this);
 
+        Push.config({
+            fallback: (payload) => {
+                this.notificationCallback();
+            }
+        });
+
         this.sendNotification = () => {
             Push.create("You found me!", {
                 icon: 'icons/icon-48x48.png',
-                requireIteraction: true,
-                silent: true,
+                // requireIteraction: true,
+                // silent: true,
                 onClick: this.notificationCallback
             });
         };

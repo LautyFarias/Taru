@@ -23,15 +23,7 @@ export default class ShakeLevel extends Level {
             title: "Excelent!",
             body: "It was easy?"
         };
-        this.currentLevel = props.currentLevel ? props.currentLevel : this.scene.key.split('-')[1];
         if (props.callback) props.callback(this);
-    }
-    preload() {
-        this.load.setBaseURL('assets')
-            .spritesheet(
-                'dude', 'images/dude.png',
-                { frameWidth: 32, frameHeight: 48 }
-            );
     }
     create() {
         this.bg = this.addLevelBg(this);
@@ -40,7 +32,7 @@ export default class ShakeLevel extends Level {
         this.addIdeaButton(this);
 
         this.shake = new Shake({
-            threshold: 25, // optional shake strength threshold
+            threshold: 10, // optional shake strength threshold
             timeout: 1000 // optional, determines the frequency of event generation
         });
 

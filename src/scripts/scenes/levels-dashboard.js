@@ -3,14 +3,14 @@ export default class LevelsDashboard extends MenuScreen {
     constructor() {
         super({ key: "levels-dashboard" });
     }
-    init() {
+    init(props) {
         this.config = {
             title: {
                 x: this.game.renderer.width / 2,
                 y: this.game.renderer.height / 6,
                 text: "Pick a Level",
                 styles: {
-                    font: "3em"
+                    font: "600 4em Roboto"
                 },
                 origin: 0.5
             },
@@ -18,19 +18,17 @@ export default class LevelsDashboard extends MenuScreen {
                 x: this.game.renderer.width / 6,
                 y: this.game.renderer.height / 2.5,
                 rowSpacing: 250,
-                scale: 0.25,
+                scale: 0.5,
                 cant: 10,
                 textStyles: {
                     font: '700 3em Roboto'
                 }
             }
         };
-    }
-    preload() {
-        this.load.image('level-button', 'images/square.png');
+        if (props.callback) props.callback(this);
     }
     create() {
-        this.bg = this.addBg(this);
+        this.bg = this.addBg(this, 'menu-bg');
         this.addReturnButton(this);
 
         /** text(x, y, text, style) */
@@ -46,7 +44,7 @@ export default class LevelsDashboard extends MenuScreen {
 
         for (
             let i = 1, row = 0, column = 1;
-            i <= this.config.btns.cant;
+            i <= this.config.btns.cant - 1;
             i++, column++
         ) {
             if (column > this.config.btns.cant / 2) {
@@ -57,14 +55,17 @@ export default class LevelsDashboard extends MenuScreen {
             this.buttons[i] = this.add.image(
                 this.config.btns.x * column,
                 column % 2 === 0 ? this.config.btns.y + (this.config.btns.rowSpacing * row) : this.config.btns.y + (this.config.btns.rowSpacing * row) + 50,
-                'level-button'
-            ).setScale(this.config.btns.scale).setTint(0, 0, 0, 0);
+                i <= this.cache.json.get('levelUnlocked') ? 'level-button' : 'level-unavailable'
+            ).setScale(this.config.btns.scale);
 
             if (i <= this.cache.json.get('levelUnlocked')) {
-                this.buttons[i].clearTint().setInteractive().on('pointerdown', () => {
+                this.buttons[i].setInteractive().on('pointerdown', () => {
                     this.scene.start(`level-${i}`, {
-                        currentLevel: i,
-                        callback: scene => scene.cameras.main.fadeIn(1000, 0, 0, 0)
+                        callback: scene => {
+                            scene.currentLevel = i;
+                            scene.cache.json.add('currentLevel', scene.currentLevel);
+                            scene.cameras.main.fadeIn(1000, 0, 0, 0);
+                        }
                     });
                 }, this);
             }
