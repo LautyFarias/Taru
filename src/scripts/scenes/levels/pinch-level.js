@@ -3,7 +3,7 @@ import Level from "../interfaces/level.js";
 export default class PinchLevel extends Level {
     constructor() {
         super({
-            key: "level-4"
+            key: "level-6"
         });
     }
     init(props) {

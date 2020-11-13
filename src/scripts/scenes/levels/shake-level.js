@@ -4,7 +4,7 @@ import Shake from 'shake.js';
 export default class ShakeLevel extends Level {
     constructor() {
         super({
-            key: 'level-6'
+            key: 'level-5'
         });
     }
     init(props) {
