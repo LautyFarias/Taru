@@ -44,7 +44,7 @@ export default class LevelsDashboard extends MenuScreen {
 
         for (
             let i = 1, row = 0, column = 1;
-            i <= this.config.btns.cant - 1;
+            i <= this.config.btns.cant;
             i++, column++
         ) {
             if (column > this.config.btns.cant / 2) {

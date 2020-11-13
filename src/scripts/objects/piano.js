@@ -7,15 +7,12 @@ export default (scene, notes, action) => {
     scene.pianoPanel = scene.add.image(x, y, 'piano', 'panel').setOrigin(0.5).setDisplaySize(
         scene.game.renderer.width / 1.5, scene.game.renderer.height / 3
     );
-    scene.add.text(
-        x,
-        scene.game.renderer.height - scene.game.renderer.height / 2.6,
-        `${notes.join(" ")}`, {
-        wordWrap: {
-            width: scene.pianoPanel.displayWidth - 100, useAdvancedWrap: true
-        },
-        align: 'center'
-    }).setOrigin(0.5).setDepth(3);
+    scene.add.image(
+        x, scene.game.renderer.height / 2,
+        'sheet'
+    ).setOrigin(0.5).setDisplaySize(
+        scene.game.renderer.width / 1.5, scene.game.renderer.height / 10
+    );
 
     scene.wrongSound = scene.sound.add('wrong-sound');
 
