@@ -60,9 +60,9 @@ export default class TitleScreen extends MenuScreen {
          */
         this.addButton(this, () => {
             this.scene.start(
-                `level-${this.cache.json.get('currentLevel')}`, {
+                `level-${localStorage.getItem('currentLevel')}`, {
                 callback: scene => {
-                    scene.currentLevel = parseInt(scene.cache.json.get('currentLevel'));
+                    scene.currentLevel = parseInt(localStorage.getItem('currentLevel'));
                     scene.cameras.main.fadeIn(1000, 0, 0, 0);
                 }
             });

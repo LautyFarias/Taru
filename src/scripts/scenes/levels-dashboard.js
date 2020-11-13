@@ -55,15 +55,15 @@ export default class LevelsDashboard extends MenuScreen {
             this.buttons[i] = this.add.image(
                 this.config.btns.x * column,
                 column % 2 === 0 ? this.config.btns.y + (this.config.btns.rowSpacing * row) : this.config.btns.y + (this.config.btns.rowSpacing * row) + 50,
-                i <= this.cache.json.get('levelUnlocked') ? 'level-button' : 'level-unavailable'
+                i <= localStorage.getItem('levelUnlocked') ? 'level-button' : 'level-unavailable'
             ).setScale(this.config.btns.scale);
 
-            if (i <= this.cache.json.get('levelUnlocked')) {
+            if (i <= localStorage.getItem('levelUnlocked')) {
                 this.buttons[i].setInteractive().on('pointerdown', () => {
                     this.scene.start(`level-${i}`, {
                         callback: scene => {
                             scene.currentLevel = i;
-                            scene.cache.json.add('currentLevel', scene.currentLevel);
+                            localStorage.setItem('currentLevel', scene.currentLevel);
                             scene.cameras.main.fadeIn(1000, 0, 0, 0);
                         }
                     });

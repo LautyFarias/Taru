@@ -22,10 +22,10 @@ export default class Level extends MenuScreen {
                 thisScene.scene.start(
                     `level-${(thisScene.currentLevel + 1)}`, {
                     callback: scene => {
-                        scene.cache.json.add('currentLevel', thisScene.currentLevel + 1);
-                        scene.currentLevel = scene.cache.json.get('currentLevel');
-                        if (scene.cache.json.get('levelUnlocked') < scene.currentLevel) {
-                            scene.cache.json.add('levelUnlocked', scene.currentLevel);
+                        localStorage.setItem('currentLevel', thisScene.currentLevel + 1);
+                        scene.currentLevel = localStorage.getItem('currentLevel');
+                        if (localStorage.getItem('levelUnlocked') < scene.currentLevel) {
+                            localStorage.setItem('levelUnlocked', scene.currentLevel);
                         }
                         scene.cameras.main.fadeIn(1000, 0, 0, 0);
                     }

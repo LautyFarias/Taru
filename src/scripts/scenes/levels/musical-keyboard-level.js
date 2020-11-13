@@ -8,7 +8,9 @@ export default class MusicalKeyboard extends Level {
     }
     init(props) {
         this.ideaMessages = [
-
+            'mi mi mi mi',
+            're mi la',
+            'mi re re'
         ];
         this.finishedMessages = {
             title: "Excelent!",

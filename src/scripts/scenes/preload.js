@@ -88,13 +88,13 @@ export default class Preload extends Phaser.Scene {
     }
     create() {
 
-        if (!this.cache.json.exists("currentLevel")) this.cache.json.add("currentLevel", 1);
-        if (!this.cache.json.exists("levelUnlocked")) this.cache.json.add(
-            "levelUnlocked", this.game.config.custom.levelUnlocked
-        );
+        if (!localStorage.getItem('currentLevel')) localStorage.setItem("currentLevel", 1);
+        if (!localStorage.getItem('levelUnlocked')) {
+            localStorage.setItem('levelUnlocked', this.game.config.custom.levelUnlocked);
+        }
 
         this.input.mouse.disableContextMenu();
-            
+
         // Push.Permission.request(null, () => {
         //     alert("Some mechanics may not work properly");
         // });
