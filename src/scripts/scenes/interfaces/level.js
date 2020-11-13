@@ -20,11 +20,11 @@ export default class Level extends MenuScreen {
         this.scene.cameras.main.once(
             Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 thisScene.scene.start(
-                    `level-${(thisScene.currentLevel + 1)}`, {
+                    `level-${(parseInt(thisScene.currentLevel) + 1)}`, {
                     callback: scene => {
-                        localStorage.setItem('currentLevel', thisScene.currentLevel + 1);
+                        localStorage.setItem('currentLevel', parseInt(thisScene.currentLevel) + 1);
                         scene.currentLevel = localStorage.getItem('currentLevel');
-                        if (localStorage.getItem('levelUnlocked') < scene.currentLevel) {
+                        if (parseInt(localStorage.getItem('levelUnlocked')) < scene.currentLevel) {
                             localStorage.setItem('levelUnlocked', scene.currentLevel);
                         }
                         scene.cameras.main.fadeIn(1000, 0, 0, 0);
