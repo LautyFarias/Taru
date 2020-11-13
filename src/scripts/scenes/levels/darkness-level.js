@@ -3,7 +3,7 @@ import Level from "../interfaces/level.js";
 
 export default class DarknessLevel extends Level {
     constructor() {
-        super({ key: "level-6" });
+        super({ key: "level-5" });
     }
     init(props) {
         this.config = {
