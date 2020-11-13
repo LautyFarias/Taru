@@ -4,7 +4,7 @@ import utils from "../../utils.js";
 
 export default class MusicalKeyboard extends Level {
     constructor() {
-        super({ key: 'level-7' });
+        super({ key: 'level-5' });
     }
     init(props) {
         this.ideaMessages = [
