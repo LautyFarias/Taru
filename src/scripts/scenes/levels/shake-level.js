@@ -38,7 +38,14 @@ export default class ShakeLevel extends Level {
 
         this.shake.start();
 
+        this.bg.shakePosition = this.plugins.get('rexShakePosition').add(this.bg, {
+            duration: 2000,
+            magnitude: 10,
+            mode: 1
+        });
+
         this.appearDude = () => {
+            this.bg.shakePosition.shake();
             this.dude = this.physics.add.sprite(
                 this.config.dude.x,
                 this.config.dude.y,

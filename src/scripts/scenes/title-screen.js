@@ -84,7 +84,7 @@ export default class TitleScreen extends MenuScreen {
         this.resizeBg(this.bg);
         this.title.setDisplaySize(
             this.game.renderer.width / 1.5,
-            this.game.renderer.height / 6
+            this.game.renderer.height / 8
         ).setPosition(
             this.game.renderer.width / 2,
             this.game.renderer.height / 6

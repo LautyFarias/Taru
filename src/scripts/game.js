@@ -5,6 +5,7 @@ import ScalePlugin from 'phaser3-rex-plugins/plugins/scale-plugin.js';
 import RoundRectanglePlugin from 'phaser3-rex-plugins/plugins/roundrectangle-plugin.js';
 import PinchPlugin from 'phaser3-rex-plugins/plugins/pinch-plugin';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
+import ShakePositionPlugin from 'phaser3-rex-plugins/plugins/shakeposition-plugin.js';
 
 import Preload from './scenes/preload.js';
 import TitleScreen from "./scenes/title-screen.js";
@@ -30,7 +31,6 @@ import FinalSceneLevel from './scenes/levels/final-scene-level.js';
         /** Game configs */
         type: Phaser.AUTO,
         pixelArt: true,
-        // TODO: hacer responsive
         physics: {
             default: 'arcade',
             arcade: {
@@ -56,7 +56,11 @@ import FinalSceneLevel from './scenes/levels/final-scene-level.js';
                     key: 'rexmovetoplugin',
                     plugin: MoveToPlugin,
                     start: true
-                },
+                }, {
+                    key: 'rexShakePosition',
+                    plugin: ShakePositionPlugin,
+                    start: true
+                }
             ]
         },
         loader: {
