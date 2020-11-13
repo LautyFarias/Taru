@@ -25,12 +25,6 @@ export default class PinchLevel extends Level {
         };
         if (props.callback) props.callback(this);
     }
-    preload() {
-        this.load.setBaseURL('assets').spritesheet(
-            'dude', 'images/dude.png',
-            { frameWidth: 32, frameHeight: 48 }
-        );
-    }
     create() {
         this.bg = this.addLevelBg(this);
         this.addReturnButton(this);
@@ -42,21 +36,23 @@ export default class PinchLevel extends Level {
             'dude', 4
         ).setScale(this.config.dude.scale);
 
-        let dragScale = this.plugins.get('rexpinchplugin').add(this);
+        let pinch = this.plugins.get('rexpinchplugin').add(this);
 
         let camera = this.cameras.main;
         let defaultCameraZoom = camera.zoom;
-        dragScale.on('pinch', dragScale => {
+        pinch.on('pinch', dragScale => {
             let scaleFactor = dragScale.scaleFactor;
-            if (
-                camera.zoom * scaleFactor >= defaultCameraZoom &&
-                camera.zoom * scaleFactor <= 30
-            ) {
+            if (camera.zoom * scaleFactor >= defaultCameraZoom &&
+                camera.zoom * scaleFactor <= 30) {
                 camera.zoom *= scaleFactor;
             }
             if (camera.zoom * scaleFactor <= 30) {
                 this.dude.setInteractive().on('pointerdown', () => {
-                    this.addModal(this, this.goNextLevel, this.finishedMessage);
+                    camera.zoom = defaultCameraZoom;
+                    this.dude.setScale(1.5);
+                    setTimeout(() => {
+                        this.addModal(this, this.goNextLevel, this.finishedMessage);
+                    }, 500);
                 }, this);
             }
         }, this);

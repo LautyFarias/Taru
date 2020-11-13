@@ -1,7 +1,7 @@
 import RoundRectangle from 'phaser3-rex-plugins/plugins/roundrectangle.js';
 export default class Modal extends RoundRectangle {
     constructor(scene, action, content, data, time) {
-        super(scene, data.x, data.y, data.width, data.height, 25, data.color);
+        super(scene, data.x, data.y, data.width, data.height > 200 ? data.height : 200, 25, data.color);
         this.time = time ? time : 500;
         this.action = action;
         this.content = content;
@@ -13,7 +13,7 @@ export default class Modal extends RoundRectangle {
             .once('complete', () => {
                 if (this.content.title) {
                     var title = this.scene.add.text(
-                        this.x, this.y - 75,
+                        this.x, this.y - 50,
                         this.content.title,
                         this.scene.game.config.custom.modal.contentStyle.title
                     ).setOrigin(0.5).setDepth(4);

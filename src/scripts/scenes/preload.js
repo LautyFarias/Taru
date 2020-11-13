@@ -23,11 +23,18 @@ export default class Preload extends Phaser.Scene {
                 contentStyle: {
                     title: {
                         font: "700 2em Roboto",
-                        wordWrap: { width: this.game.renderer.width - 200, useAdvancedWrap: true }
+                        wordWrap: {
+                            width: this.game.renderer.width - 200,
+                            useAdvancedWrap: true
+                        }
                     },
                     body: {
                         font: "400 1.8em Roboto",
-                        wordWrap: { width: this.game.renderer.width - 200, useAdvancedWrap: true }
+                        wordWrap: {
+                            width: this.game.renderer.width - 200,
+                            useAdvancedWrap: true
+                        },
+                        align: "center"
                     }
                 }
             },

@@ -34,6 +34,9 @@ export default class Level extends MenuScreen {
             });
     }
     resizeLevelBg(bg) {
-        bg.setDisplaySize(bg.scene.game.renderer.width, bg.scene.game.renderer.height);
+        bg.setDisplaySize(
+            bg.width > bg.scene.game.renderer.width ? bg.width : bg.scene.game.renderer.width,
+            bg.height > bg.scene.game.renderer.height ? bg.height : bg.scene.game.renderer.height
+        );
     }
 }
