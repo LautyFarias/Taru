@@ -10,11 +10,11 @@ export default class SoundLevel extends Level {
         this.ideaMessages = [
             "Maybe you should enable your sound, just maybe...",
             "Hot, Cold, Hot, Cold. You understand me?",
-            "The closer, more acute"
+            "The closer, the higher pitched"
         ];
         this.finishedMessage = {
             title: "Excelent!",
-            body: "It was easy?"
+            body: "But don't call me if there is no candy"
         };
         if (props.callback) props.callback(this);
     }

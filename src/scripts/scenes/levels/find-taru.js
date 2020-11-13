@@ -27,7 +27,7 @@ export default class FindTaru extends Level {
         ];
         this.finishedMessage = {
             title: "Excelent!",
-            body: "Was it easy?"
+            body: "The spirits like to hide too"
         };
         if (props.callback) props.callback(this);
     }

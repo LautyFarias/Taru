@@ -22,7 +22,7 @@ export default class DarknessLevel extends Level {
         };
         this.finishedMessage = {
             title: "Excelent!",
-            body: "Was it easy?"
+            body: "Aren't lanterns life saviours?"
         };
         if (props.callback) props.callback(this);
     }

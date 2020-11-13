@@ -21,7 +21,7 @@ export default class PushLevel extends Level {
         ];
         this.finishedMessage = {
             title: "Excelent!",
-            body: "It was easy?"
+            body: "Communication is key"
         };
         if (props.callback) props.callback(this);
     }

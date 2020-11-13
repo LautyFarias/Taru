@@ -20,8 +20,8 @@ export default class IdeaLevel extends Level {
             "Take this off my face!"
         ];
         this.finishedMessage = {
-            title: "Default Title",
-            body: "Default body"
+            title: "Excelent!",
+            body: "Much better to be seen"
         };
         if (props.callback) props.callback(this);
     }

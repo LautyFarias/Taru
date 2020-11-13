@@ -21,7 +21,7 @@ export default class ShakeLevel extends Level {
         ];
         this.finishedMessage = {
             title: "Excelent!",
-            body: "It was easy?"
+            body: "It's preferable to be on the ground"
         };
         if (props.callback) props.callback(this);
     }

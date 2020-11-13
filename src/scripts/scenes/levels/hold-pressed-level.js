@@ -19,7 +19,7 @@ export default class HoldPressedLevel extends Level {
         ];
         this.finishedMessage = {
             title: "Excelent!",
-            body: "It was easy?"
+            body: "Short legs make it harder to run"
         };
         if (props.callback) props.callback(this);
     }

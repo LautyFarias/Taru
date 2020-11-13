@@ -21,7 +21,7 @@ export default class PinchLevel extends Level {
         ];
         this.finishedMessage = {
             title: "Excelent!",
-            body: "It was easy?"
+            body: "It's difficult to hide with that background"
         };
         if (props.callback) props.callback(this);
     }
