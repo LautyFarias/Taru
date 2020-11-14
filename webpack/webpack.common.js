@@ -33,7 +33,8 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: 'src/assets', to: 'assets' },
       { from: 'pwa', to: '' },
-      { from: 'src/favicon.ico', to: '' }
+      { from: 'src/favicon.ico', to: '' },
+      { from: 'src/.well-known', to: '.well-known' }
     ]),
     new InjectManifest({
       swSrc: path.resolve(__dirname, '../pwa/sw.js')
